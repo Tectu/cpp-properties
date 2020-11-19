@@ -15,17 +15,7 @@ struct color
     }
 };
 
-template<>
-struct properties::property<color> :
-    property_impl<color>
-{
-    using property_impl<color>::operator=;
-
-    [[nodiscard]] std::string to_string() const override
-    {
-        return this->data.to_string();
-    }
-};
+REGISTER_PROPERTY(color, return this->data.to_string())
 
 struct shape :
     properties::properties

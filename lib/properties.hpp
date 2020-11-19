@@ -11,6 +11,19 @@
 #define MAKE_PROPERTY(name, type) \
     ::properties::property<type>& name = make_property<type>(#name);
 
+#define REGISTER_PROPERTY(type, return_string)                  \
+    template<>                                                  \
+    struct properties::property<type> :                         \
+        property_impl<type>                                     \
+    {                                                           \
+        using property_impl<type>::operator=;                   \
+                                                                \
+        [[nodiscard]] std::string to_string() const override    \
+        {                                                       \
+            return_string;                                      \
+        }                                                       \
+    };
+
 namespace properties
 {
     class properties

@@ -5,6 +5,8 @@
 #include <string>
 #include <sstream>
 
+#include "exceptions.hpp"
+
 #define MAKE_PROPERTY(name, type) \
     ::properties::property<type>& name = make_property<type>(#name);
 
@@ -50,24 +52,32 @@ namespace properties
         template<typename T>
         property<T>& make_property(const std::string& name)
         {
-            assert(not m_properties.contains(name));
+            if (m_properties.contains(name))
+                throw property_exists(name);
+
             auto p = new property<T>;
-            m_properties.try_emplace(name, p);
+            m_properties.emplace(name, p);
             return *p;
         }
 
         template<typename T>
         void set_property(const std::string& name, const T& t)
         {
-            assert(m_properties.contains(name));
+            if (not m_properties.contains(name))
+                throw property_nonexist(name);
+
             property_cast<T>(m_properties[name]) = t;
         }
 
         template<typename T>
         [[nodiscard]] const T& get_property(const std::string& name) const
         {
-            assert(m_properties.contains(name));
-            return property_cast<T>(m_properties.at(name));
+            try {
+                return property_cast<T>(m_properties.at(name));
+            }
+            catch([[maybe_unused]] const std::out_of_range& e) {
+                throw property_nonexist(name);
+            }
         }
 
         [[nodiscard]] std::string to_string() const

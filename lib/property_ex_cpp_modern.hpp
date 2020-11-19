@@ -11,19 +11,13 @@ namespace properties
      */
     template<>
     struct property<std::filesystem::path> :
-        property_base
+        property_impl<std::filesystem::path>
     {
-        std::filesystem::path data;
-
-        property<std::filesystem::path>& operator=(const std::filesystem::path& path)
-        {
-            data = path;
-            return *this;
-        }
+        using property_impl<std::filesystem::path>::operator=;
 
         [[nodiscard]] std::string to_string() const override
         {
-            return data.string();
+            return this->data.string();
         }
     };
 

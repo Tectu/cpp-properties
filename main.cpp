@@ -17,15 +17,13 @@ struct color
 
 template<>
 struct properties::property<color> :
-    property_base
+    property_impl<color>
 {
-    color data2;
-
-    property<color>& operator=(const color& c) { data2 = c; return *this; }
+    using property_impl<color>::operator=;
 
     [[nodiscard]] std::string to_string() const override
     {
-        return data2.to_string();
+        return this->data.to_string();
     }
 };
 
@@ -58,29 +56,19 @@ int main()
 {
     auto print_all = [](const shape& p) {
         std::cout << p.to_string() << "\n";
-        std::cout << p.x << "\n";
-        //std::cout << p.get_property<int>("x") << "\n";
         std::cout << std::endl;
     };
 
     shape s;
-    s.x = 51;
-    print_all(s);
-
     s.x = -2;
     s.str = "FooBar";
     s.path = "C:/Users/joel/Documents/junk";
     s.fg_color = { "blue", 14, 58, 128 };
     print_all(s);
 
-    s.set_property<int>("x", 14);
-    s.set_property<std::string>("str", "Hello World!");
-    print_all(s);
-    std::cout << s.str << "\n" << s.get_property<std::string>("str") << std::endl;
-
     shape s2;
     s2 = std::move(s);
-
+    s2.path = "C:/users/";
 
     std::cout << "\n\n\n";
     print_all(s);

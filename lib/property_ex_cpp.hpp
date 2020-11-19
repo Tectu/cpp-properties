@@ -11,15 +11,13 @@ namespace properties
      */
     template<std::integral T>
     struct property<T> :
-            property_base
+        property_impl<T>
     {
-        T data = { };
-
-        property<T>& operator=(const T& rhs) { data = rhs; notify(); return *this; }
+        using property_impl<T>::operator=;
 
         [[nodiscard]] std::string to_string() const override
         {
-            return std::to_string(data);
+            return std::to_string(this->data);
         }
     };
 
@@ -28,17 +26,13 @@ namespace properties
      */
     template<typename T>
     struct property<std::basic_string<T>> :
-        property_base
+        property_impl<std::basic_string<T>>
     {
-        std::basic_string<T> data;
-
-        property<std::basic_string<T>>& operator=(const std::basic_string<T>& str) {
-            data = str; notify(); return *this;
-        }
+        using property_impl<std::basic_string<T>>::operator=;
 
         [[nodiscard]] std::string to_string() const override
         {
-            return data;
+            return this->data;
         }
     };
 

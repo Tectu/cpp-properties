@@ -38,20 +38,23 @@ namespace properties
     };
 
     template<typename T>
-    struct property :
+    struct property_impl :
         property_base
     {
         T data = { };
 
-        property() = default;
-        property(const property<T>& other) = default;
-        property(property<T>&& other) noexcept = default;
-        virtual ~property() = default;
+        property_impl<T>& operator=(const T& t)
+        {
+            this->data = t;
+            this->notify();
+            return *this;
+        }
+    };
 
-        property<T>& operator=(const property<T>& rhs) = default;
-        property<T>& operator=(property<T>&& rhs) noexcept = default;
-        property<T>& operator=(const T& t) { data = t; notify(); return *this; }
-        property<T>& operator=(T&& t) { data = std::move(t); notify(); return *this; }
+    template<typename T>
+    struct property :
+        property_impl<T>
+    {
     };
 
     template<typename T>

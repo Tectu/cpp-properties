@@ -4,38 +4,37 @@
 
 #include "property.hpp"
 
-namespace properties
+/**
+ * Property for `std::basic_string`.
+ */
+template<typename T>
+struct properties::property<std::basic_string<T>> :
+    property_impl<std::basic_string<T>>
 {
-    /**
-     * Class template specialization for integral types.
-     */
-    template<std::integral T>
-    struct property<T> :
-        property_impl<T>
+    using property_impl<std::basic_string<T>>::operator=;
+
+    property()
     {
-        using property_impl<T>::operator=;
+        this->to_string = [this](){ return this->data; };
+        this->from_string = [this](const std::string& str){ *this = str; };
+    }
+};
 
-        property()
-        {
-            this->to_string = [this](){ return std::to_string(this->data); };
-            this->from_string = [this](const std::string& str){  };
-        }
-    };
+REGISTER_PROPERTY(
+    int,
+    [this](){ return std::to_string(this->data); },
+    [this](const std::string& str){ this->data = std::stoi(str); }
+)
 
-    /**
-     * Property for `std::basic_string`.
-     */
-    template<typename T>
-    struct property<std::basic_string<T>> :
-        property_impl<std::basic_string<T>>
-    {
-        using property_impl<std::basic_string<T>>::operator=;
+REGISTER_PROPERTY(
+    float,
+    [this](){ return std::to_string(this->data); },
+    [this](const std::string& str){ this->data = std::stof(str); }
+)
 
-        property()
-        {
-            this->to_string = [this](){ return this->data; };
-            this->from_string = [this](const std::string& str){ *this = str; };
-        }
-    };
+REGISTER_PROPERTY(
+    double,
+    [this](){ return std::to_string(this->data); },
+    [this](const std::string& str){ this->data = std::stod(str); }
+)
 
-}

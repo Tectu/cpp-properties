@@ -11,12 +11,13 @@ struct color
 
     [[nodiscard]] std::string to_string() const
     {
-        return { name + ": " + std::to_string(r) + std::to_string(g) + std::to_string(b) };
+        // ...
+        return { };
     }
 
     void from_string(const std::string& str)
     {
-
+        // ...
     }
 };
 
@@ -30,6 +31,8 @@ struct shape :
     properties::properties
 {
     MAKE_PROPERTY(x, int);
+    MAKE_PROPERTY(f, float);
+    MAKE_PROPERTY(d, double);
     MAKE_PROPERTY(str, std::string);
     MAKE_PROPERTY(path, std::filesystem::path);
     MAKE_PROPERTY(fg_color, color);

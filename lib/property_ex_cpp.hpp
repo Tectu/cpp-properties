@@ -15,9 +15,10 @@ namespace properties
     {
         using property_impl<T>::operator=;
 
-        [[nodiscard]] std::string to_string() const override
+        property()
         {
-            return std::to_string(this->data);
+            this->to_string = [this](){ return std::to_string(this->data); };
+            this->from_string = [this](const std::string& str){  };
         }
     };
 
@@ -30,9 +31,10 @@ namespace properties
     {
         using property_impl<std::basic_string<T>>::operator=;
 
-        [[nodiscard]] std::string to_string() const override
+        property()
         {
-            return this->data;
+            this->to_string = [this](){ return this->data; };
+            this->from_string = [this](const std::string& str){ *this = str; };
         }
     };
 

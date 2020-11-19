@@ -5,24 +5,26 @@
 #include <string>
 #include <sstream>
 
-#include "property.hpp"
-#include "property_ex.hpp"
-
 #define MAKE_PROPERTY(name, type) \
     ::properties::property<type>& name = make_property<type>(#name);
 
-#define REGISTER_PROPERTY(type, return_string)                  \
+#define REGISTER_PROPERTY(type, f_to_string, f_from_string)     \
     template<>                                                  \
     struct properties::property<type> :                         \
         property_impl<type>                                     \
     {                                                           \
         using property_impl<type>::operator=;                   \
                                                                 \
-        [[nodiscard]] std::string to_string() const override    \
+        property()                                              \
         {                                                       \
-            return_string;                                      \
+            this->to_string = f_to_string;                      \
+            this->from_string = f_from_string;                  \
         }                                                       \
     };
+
+// Include built-in properties
+#include "property.hpp"
+#include "property_ex.hpp"
 
 namespace properties
 {

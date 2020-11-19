@@ -13,9 +13,18 @@ struct color
     {
         return { name + ": " + std::to_string(r) + std::to_string(g) + std::to_string(b) };
     }
+
+    void from_string(const std::string& str)
+    {
+
+    }
 };
 
-REGISTER_PROPERTY(color, return this->data.to_string())
+REGISTER_PROPERTY(
+    color,
+    [this](){ return data.to_string(); },
+    [this](const std::string& str){ this->data.from_string(str); }
+)
 
 struct shape :
     properties::properties
@@ -27,6 +36,7 @@ struct shape :
 
     shape()
     {
+        x.register_observer([](){ std::cout << "x property changed!\n"; });
         path.register_observer([](){ std::cout << "path property changed!\n"; });
     }
 

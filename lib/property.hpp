@@ -18,7 +18,8 @@ namespace properties
         property_base& operator=(const property_base& rhs) = default;
         property_base& operator=(property_base&& rhs) noexcept = default;
 
-        [[nodiscard]] virtual std::string to_string() const = 0;
+        std::function<std::string()> to_string;
+        std::function<void(std::string)> from_string;
 
         void register_observer(callback cb)
         {

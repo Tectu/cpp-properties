@@ -21,7 +21,7 @@ namespace properties
         std::function<std::string()> to_string;
         std::function<void(std::string)> from_string;
 
-        void register_observer(callback cb)
+        void register_observer(const callback& cb)
         {
             m_observers.push_back(cb);
         }
@@ -29,7 +29,7 @@ namespace properties
     protected:
         void notify()
         {
-            std::for_each(std::begin(m_observers), std::end(m_observers), [](callback cb){
+            std::for_each(std::begin(m_observers), std::end(m_observers), [](const callback& cb){
                 cb();
             });
         }

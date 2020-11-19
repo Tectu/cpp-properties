@@ -4,6 +4,10 @@
 
 namespace properties
 {
+    using callback = std::function<void()>;
+
+    class properties;
+
     struct property_base
     {
         property_base() = default;
@@ -15,6 +19,22 @@ namespace properties
         property_base& operator=(property_base&& rhs) noexcept = default;
 
         [[nodiscard]] virtual std::string to_string() const = 0;
+
+        void register_observer(callback cb)
+        {
+            m_observers.push_back(cb);
+        }
+
+    protected:
+        void notify()
+        {
+            std::for_each(std::begin(m_observers), std::end(m_observers), [](callback cb){
+                cb();
+            });
+        }
+
+    private:
+        std::vector<callback> m_observers;
     };
 
     template<typename T>
@@ -30,25 +50,8 @@ namespace properties
 
         property<T>& operator=(const property<T>& rhs) = default;
         property<T>& operator=(property<T>&& rhs) noexcept = default;
-        property<T>& operator=(const T& t) { data = t; return *this; }
-        property<T>& operator=(T&& t) { data = std::move(t); return *this; }
-    };
-
-    /**
-     * Class template specialization for integral types.
-     */
-    template<std::integral T>
-    struct property<T> :
-        property_base
-    {
-        T data = { };
-
-        property<T>& operator=(const T& rhs) { data = rhs; return *this; }
-
-        [[nodiscard]] std::string to_string() const override
-        {
-            return std::to_string(data);
-        }
+        property<T>& operator=(const T& t) { data = t; notify(); return *this; }
+        property<T>& operator=(T&& t) { data = std::move(t); notify(); return *this; }
     };
 
     template<typename T>

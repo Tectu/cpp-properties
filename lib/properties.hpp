@@ -16,10 +16,20 @@ namespace properties
     class properties
     {
     public:
+        properties() = default;
+
         virtual ~properties()
         {
             for (auto& [key, value] : m_properties)
                 delete value;
+        }
+
+        properties& operator=(properties&& rhs) noexcept
+        {
+            m_properties = std::move(rhs.m_properties);
+            rhs.m_properties.clear();
+
+            return *this;
         }
 
         template<typename T>

@@ -1,5 +1,5 @@
 # Introduction
-This is a C++20 library providing a property system to client classes.
+This is a C++17 library providing a property system to client classes.
 
 # Features
 The library is built with the following aspects in mind:

@@ -56,7 +56,7 @@ namespace properties
         template<typename T>
         property<T>& make_property(const std::string& name)
         {
-            if (m_properties.contains(name))
+            if (m_properties.count(name) > 0)
                 throw property_exists(name);
 
             auto p = new property<T>;
@@ -67,7 +67,7 @@ namespace properties
         template<typename T>
         void set_property(const std::string& name, const T& t)
         {
-            if (not m_properties.contains(name))
+            if (m_properties.count(name) > 0)
                 throw property_nonexist(name);
 
             property_cast<T>(m_properties[name]) = t;

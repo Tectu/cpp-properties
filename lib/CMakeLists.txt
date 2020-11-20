@@ -1,9 +1,19 @@
+# Variables for convenience
 set(NAME          cppproperties)
 set(TARGET_OBJ    ${NAME}-objs)
 set(TARGET_SHARED ${NAME}-shared)
 set(TARGET_STATIC ${NAME}-static)
 
-
+# List of public headers
+set(HEADERS_PUBLIC
+    archiver_xml.hpp
+    exceptions.hpp
+    properties.hpp
+    property.hpp
+    property_ex.hpp
+    property_ex_cpp.hpp
+    property_ex_cpp_modern.hpp
+)
 
 ################################################################################
 # Object library                                                               #
@@ -20,15 +30,8 @@ target_compile_features(
 target_sources(
     ${TARGET_OBJ}
     PRIVATE
+        ${HEADERS_PUBLIC}
         archiver_xml.cpp
-        archiver_xml.hpp
-        exceptions.hpp
-        properties.hpp
-        property.hpp
-        property_ex.hpp
-        property_ex_cpp.hpp
-        property_ex_cpp_modern.hpp
-
         3rdparty/tinyxml2/tinyxml2.cpp
 )
 
@@ -101,9 +104,15 @@ include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 set(ConfigPackageLocation ${CMAKE_INSTALL_LIBDIR}/cmake/${NAME})
 
+# Install public headers
+install(
+    FILES ${HEADERS_PUBLIC}
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${NAME}
+)
+
 # Install export header
 install(
-    FILES ${PROJECT_BINARY_DIR}/${NAME}_export.hpp
+    FILES ${CMAKE_CURRENT_BINARY_DIR}/${NAME}_export.hpp
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${NAME}
 )
 

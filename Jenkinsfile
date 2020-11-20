@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
                 steps
                 {
                     cmakeBuild(
@@ -14,16 +13,6 @@ pipeline {
                         installation: 'InSearchPath'
                     )
                 }
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
             }
         }
     }

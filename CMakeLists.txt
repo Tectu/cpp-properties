@@ -1,15 +1,12 @@
 cmake_minimum_required(VERSION 3.17)
 project(cpp_properties)
 
-set(CMAKE_CXX_STANDARD 20)
+option(BUILD_EXAMPLES "Whether to build examples" ON)
 
-set(TARGET cpp_properties)
-add_executable(${TARGET})
+# Include examples (if supposed to)
+if (BUILD_EXAMPLES)
+    add_subdirectory(examples)
+endif()
 
+# Add the actual library
 add_subdirectory(lib)
-
-target_sources(
-    ${TARGET}
-    PRIVATE
-        main.cpp
-)

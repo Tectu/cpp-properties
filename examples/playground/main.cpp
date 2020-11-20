@@ -2,7 +2,7 @@
 #include <sstream>
 #include <filesystem>
 
-#include "lib/properties.hpp"
+#include "../../lib/properties.hpp"
 
 struct color
 {
@@ -22,13 +22,13 @@ struct color
 };
 
 REGISTER_PROPERTY(
-    color,
-    [this](){ return data.to_string(); },
-    [this](const std::string& str){ this->data.from_string(str); }
+        color,
+        [this](){ return data.to_string(); },
+        [this](const std::string& str){ this->data.from_string(str); }
 )
 
 struct shape :
-    properties::properties
+        properties::properties
 {
     MAKE_PROPERTY(x, int);
     MAKE_PROPERTY(f, float);

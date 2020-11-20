@@ -1,3 +1,17 @@
+################################################################################
+# Object library                                                               #
+################################################################################
+
+set(TARGET cppproperties-objs)
+
+add_library(${TARGET} OBJECT)
+
+target_compile_features(
+    ${TARGET}
+    PUBLIC
+        cxx_std_20
+)
+
 target_sources(
     ${TARGET}
     PRIVATE

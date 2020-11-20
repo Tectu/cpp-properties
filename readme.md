@@ -15,6 +15,8 @@ This library is MIT licenses.
 
 It uses [tinyxml2](https://github.com/leethomason/tinyxml2) for serialization. The tinyxml2 library itself is zlib licensed.
 
+# Examples
+Start by reading the `Usage` section below. More examples can be found in the [examples](examples) directory.
 # Usage
 Basic usage only requires inheriting from `properties::properties` and adding properties using `MAKE_PROPERTY()`:
 ```cpp

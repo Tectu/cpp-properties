@@ -1,5 +1,7 @@
 #include <fstream>
 
+#include "3rdparty/tinyxml2/tinyxml2.h"
+
 #include "archiver_xml.hpp"
 #include "properties.hpp"
 

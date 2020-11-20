@@ -3,8 +3,6 @@
 #include <filesystem>
 #include <ostream>
 
-#include "3rdparty/tinyxml2/tinyxml2.h"
-
 namespace properties
 {
 

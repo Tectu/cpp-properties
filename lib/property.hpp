@@ -51,6 +51,8 @@ namespace properties
             this->notify();
             return *this;
         }
+
+        operator T() const { return data; }
     };
 
     template<typename T>

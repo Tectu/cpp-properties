@@ -5,6 +5,15 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
+                steps
+                {
+                    cmakeBuild(
+                        buildDir: 'build',
+                        buildType: 'debug',
+                        generator: 'Unix Makefiles',
+                        installation: 'InSearchPath'
+                    )
+                }
             }
         }
         stage('Test') {

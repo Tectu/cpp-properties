@@ -1,3 +1,5 @@
+#include <fstream>
+
 #include "archiver_xml.hpp"
 #include "properties.hpp"
 
@@ -7,8 +9,13 @@ std::string archiver_xml::save(const properties& p, const bool add_declaration)
 {
     // Create document
     tinyxml2::XMLDocument doc;
-    if (add_declaration)
-        doc.NewDeclaration();
+
+    // Add the XML declaration (if supposed to)
+    if (add_declaration) {
+        tinyxml2::XMLDeclaration* decl = doc.NewDeclaration();
+        assert(decl);
+        doc.InsertFirstChild(decl);
+    }
 
     // Add the root node
     tinyxml2::XMLElement* root = doc.NewElement("properties");
@@ -35,7 +42,6 @@ std::string archiver_xml::save(const properties& p, const bool add_declaration)
     return str;
 }
 
-#include <iostream>
 bool archiver_xml::load(properties& p, const std::string& str)
 {
     // Create document
@@ -52,8 +58,51 @@ bool archiver_xml::load(properties& p, const std::string& str)
         tinyxml2::XMLElement* element = root->FirstChildElement(key.c_str());
         if (not element)
             continue;
-        std::cout << key << ": " << element->Name() << std::endl;
+
+        if (element->GetText()) {
+            const std::string value_str( element->GetText() );
+            assert(value);
+            value->from_string( element->GetText() );
+        }
     }
 
     return true;
+}
+
+std::pair<bool, std::string> archiver_xml::save(const properties& p, const std::filesystem::path& path)
+{
+    // Prepare file
+    std::ofstream file;
+    file.open(path, std::ios::out | std::ios::trunc);
+    if (not file.is_open())
+        return { false, "Could not open file for writing at path " + path.string() };
+
+    // Write to file
+    file << save(p, true);
+
+    // Close file
+    file.close();
+
+    return { true, "" };
+}
+
+std::pair<bool, std::string> archiver_xml::load(properties& p, const std::filesystem::path& path)
+{
+    // Prepare file
+    std::ifstream file;
+    file.open(path, std::ios::in);
+    if (not file.is_open())
+        return { false, "Could not open file for reading at path " + path.string() };
+
+    // Read from file
+    std::stringstream ss;
+    ss << file.rdbuf();
+
+    // Close the file
+    file.close();
+
+    // Load from string
+    load(p, ss.str());
+
+    return { true, "" };
 }

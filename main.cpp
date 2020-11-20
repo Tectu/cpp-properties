@@ -43,16 +43,6 @@ struct shape :
         path.register_observer([](){ std::cout << "path property changed!\n"; });
     }
 
-    shape& operator=(shape&& rhs) noexcept
-    {
-        x = rhs.x;
-        str = rhs.str;
-        path = rhs.path;
-        fg_color = rhs.fg_color;
-        properties::properties::operator=(std::move(rhs));
-
-        return *this;
-    }
 };
 
 int main()
@@ -62,25 +52,27 @@ int main()
         std::cout << std::endl;
     };
 
-    shape s;
-    s.x = -2;
-    s.str = "FooBar";
-    s.path = "C:/Users/joel/Documents/junk";
-    s.fg_color = { "blue", 14, 58, 128 };
-    print_all(s);
+    shape s1;
+    s1.x = -2;
+    s1.d = 13.32;
+    s1.str = "FooBar";
+    s1.path = "C:/Users/joel/Documents/junk";
+    s1.fg_color = { "blue", 14, 58, 128 };
+    print_all(s1);
 
     shape s2;
-    s2 = std::move(s);
-    s2.path = "C:/users/";
+    s2.path = "asf";
 
-    std::cout << "\n\n\n";
-    print_all(s);
+    const std::string& xml = s1.to_xml();
+    std::cout << xml << std::endl;
+    s2.from_xml(xml);
     print_all(s2);
 
-    const std::string& xml = s2.to_xml();
-    std::cout << xml << std::endl;
-    s.from_xml(xml);
-    print_all(s);
+    s2.to_xml_file("C:/Users/joel/Desktop/shape_03.xml");
+
+    shape s3;
+    s3.from_xml_file("C:/Users/joel/Desktop/shape_03.xml");
+    print_all(s3);
 
     return 0;
 }

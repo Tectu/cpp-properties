@@ -44,13 +44,14 @@ namespace properties
                 delete value;
         }
 
-        properties& operator=(properties&& rhs) noexcept
+        properties& operator=(const properties& rhs)
         {
-            m_properties = std::move(rhs.m_properties);
-            rhs.m_properties.clear();
+            assert(m_properties.size() == rhs.m_properties.size());
 
             return *this;
         }
+
+        properties& operator=(properties&& rhs) noexcept = delete;
 
         template<typename T>
         property<T>& make_property(const std::string& name)
@@ -104,6 +105,16 @@ namespace properties
         bool from_xml(const std::string& xml_str)
         {
             return archiver_xml::load(*this, xml_str);
+        }
+
+        std::pair<bool, std::string> to_xml_file(const std::filesystem::path& path) const
+        {
+            return archiver_xml::save(*this, path);
+        }
+
+        std::pair<bool, std::string> from_xml_file(const std::filesystem::path& path)
+        {
+            return archiver_xml::load(*this, path);
         }
 
     private:

@@ -2,15 +2,26 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Run cmake')
+        {
             steps
             {
                 cmakeBuild(
                     buildDir: 'build',
-                    buildType: 'debug',
+                    cleanBuild: true,
                     generator: 'Unix Makefiles',
                     installation: 'InSearchPath'
                 )
+            }
+        }
+
+        stage('Build')
+        {
+            steps
+            {
+                dir('build') {
+                    sh 'make -j4'
+                }
             }
         }
     }

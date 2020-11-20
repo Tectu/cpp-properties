@@ -77,5 +77,10 @@ int main()
     print_all(s);
     print_all(s2);
 
+    const std::string& xml = s2.to_xml();
+    std::cout << xml << std::endl;
+    s.from_xml(xml);
+    print_all(s);
+
     return 0;
 }

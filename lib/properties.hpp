@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 
+#include "archiver_xml.hpp"
 #include "exceptions.hpp"
 
 #define MAKE_PROPERTY(name, type) \
@@ -32,6 +33,8 @@ namespace properties
 {
     class properties
     {
+        friend class archiver_xml;
+
     public:
         properties() = default;
 
@@ -91,6 +94,16 @@ namespace properties
             ss << "]";
 
             return ss.str();
+        }
+
+        [[nodiscard]] std::string to_xml() const
+        {
+            return archiver_xml::save(*this, false);
+        }
+
+        bool from_xml(const std::string& xml_str)
+        {
+            return archiver_xml::load(*this, xml_str);
         }
 
     private:

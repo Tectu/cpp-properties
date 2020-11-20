@@ -3,4 +3,13 @@ project(cpp_properties)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(cpp_properties main.cpp)
+set(TARGET cpp_properties)
+add_executable(${TARGET})
+
+add_subdirectory(lib)
+
+target_sources(
+    ${TARGET}
+    PRIVATE
+        main.cpp
+)

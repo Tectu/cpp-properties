@@ -68,7 +68,7 @@ namespace properties
         template<typename T>
         void set_property(const std::string& name, const T& t)
         {
-            if (m_properties.count(name) > 0)
+            if (m_properties.count(name) < 0)
                 throw property_nonexist(name);
 
             property_cast<T>(m_properties[name]) = t;

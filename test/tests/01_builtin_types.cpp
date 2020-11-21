@@ -1,4 +1,3 @@
-#include "doctest.hpp"
 #include "../test.hpp"
 
 TEST_CASE("built-in types")

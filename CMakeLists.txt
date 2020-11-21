@@ -18,6 +18,9 @@ endif()
 # Add the actual library
 add_subdirectory(lib)
 
+# Add tests
+add_subdirectory(test)
+
 
 ################################################################################
 # CPack                                                                        #

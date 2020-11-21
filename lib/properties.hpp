@@ -38,6 +38,8 @@ namespace properties
 
     public:
         properties() = default;
+        properties(const properties& other) = delete;
+        properties(properties&& other) = delete;
 
         virtual ~properties()
         {
@@ -45,13 +47,7 @@ namespace properties
                 delete value;
         }
 
-        properties& operator=(const properties& rhs)
-        {
-            assert(m_properties.size() == rhs.m_properties.size());
-
-            return *this;
-        }
-
+        properties& operator=(const properties& rhs) = delete;
         properties& operator=(properties&& rhs) noexcept = delete;
 
         template<typename T>

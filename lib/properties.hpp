@@ -17,6 +17,7 @@
         property_impl<type>                                     \
     {                                                           \
         using property_impl<type>::operator=;                   \
+        using property_impl<type>::operator==;                  \
                                                                 \
         property()                                              \
         {                                                       \

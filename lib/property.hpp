@@ -53,6 +53,11 @@ namespace properties
             return *this;
         }
 
+        bool operator==(const T& t) const
+        {
+            return this->data == t;
+        }
+
         operator T() const { return data; }
     };
 

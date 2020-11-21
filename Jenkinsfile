@@ -24,6 +24,16 @@ pipeline {
                 }
             }
         }
+
+        stage('Test')
+        {
+            steps
+            {
+                dir('build/test') {
+                    sh "./tests"
+                }
+            }
+        }
     }
 }
 

@@ -1,6 +1,4 @@
-
-# Created by https://www.toptal.com/developers/gitignore/api/clion
-# Edit at https://www.toptal.com/developers/gitignore?templates=clion
+cppcheck*.xml
 
 ### CLion ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider

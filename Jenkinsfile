@@ -34,6 +34,17 @@ pipeline {
                 }
             }
         }
+
+        stage('Analysis')
+        {
+            steps
+            {
+                sh "cppcheck -j 4 --enable=all --inconclusive --xml --xml-version=2 . -ibuild -ilib/3rdparty 2> cppcheck.xml"
+                publishCppcheck(
+                    pattern: '**/cppcheck.xml'
+                )
+            }
+        }
     }
 }
 

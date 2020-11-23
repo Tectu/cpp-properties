@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'FreeBSD' }
 
     stages {
         stage('Run cmake')
@@ -9,11 +9,27 @@ pipeline {
                 stage('Windows')
                 {
                     agent { label 'Windows' }
-                    steps
+                    stages
                     {
-                        dir('Run CMake') {
-                            sh "rm -rf *"
-                            sh "cmake -G'MSYS Makefiles' .."
+                        stage('CMake [Windows]')
+                        {
+                            steps
+                            {
+                                dir('build') {
+                                    sh "rm -rf *"
+                                    sh "cmake -G'MSYS Makefiles' .."
+                                }
+                            }
+                        }
+
+                        stage('Build [Windows]')
+                        {
+                            steps
+                            {
+                                dir('build') {
+                                    sh 'make -j8'
+                                }
+                            }
                         }
                     }
                 }
@@ -21,45 +37,51 @@ pipeline {
                 stage('Unix')
                 {
                     agent { label 'FreeBSD' }
-                    steps
+                    stages
                     {
-                        dir('Run CMake') {
-                            sh "rm -rf *"
-                            sh "cmake -G'Unix Makefiles' .."
+                        stage('CMake [FreeBSD]')
+                        {
+                            steps
+                            {
+                                dir('build') {
+                                    sh "rm -rf *"
+                                    sh "cmake -G'Unix Makefiles' .."
+                                }
+                            }
+                        }
+
+                        stage('Build [FreeBSD]')
+                        {
+                            steps
+                            {
+                                dir('build') {
+                                    sh 'make -j8'
+                                }
+                            }
+                        }
+
+                        stage('Test [FreeBSD]')
+                        {
+                            steps
+                            {
+                                dir('build/test') {
+                                    sh "./tests"
+                                }
+                            }
+                        }
+
+                        stage('Analysis [FreeBSD]')
+                        {
+                            steps
+                            {
+                                sh "cppcheck -j 4 --enable=all --inconclusive --xml --xml-version=2 lib -ilib/3rdparty 2> cppcheck.xml"
+                                publishCppcheck(
+                                    pattern: '**/cppcheck.xml'
+                                )
+                            }
                         }
                     }
                 }
-            }
-        }
-
-        stage('Build')
-        {
-            steps
-            {
-                dir('build') {
-                    sh 'make -j4'
-                }
-            }
-        }
-
-        stage('Test')
-        {
-            steps
-            {
-                dir('build/test') {
-                    sh "./tests"
-                }
-            }
-        }
-
-        stage('Analysis')
-        {
-            steps
-            {
-                sh "cppcheck -j 4 --enable=all --inconclusive --xml --xml-version=2 lib -ilib/3rdparty 2> cppcheck.xml"
-                publishCppcheck(
-                    pattern: '**/cppcheck.xml'
-                )
             }
         }
     }

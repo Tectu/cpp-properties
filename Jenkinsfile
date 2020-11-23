@@ -4,14 +4,31 @@ pipeline {
     stages {
         stage('Run cmake')
         {
-            steps
+            parallel
             {
-                cmakeBuild(
-                    buildDir: 'build',
-                    cleanBuild: true,
-                    generator: 'Unix Makefiles',
-                    installation: 'InSearchPath'
-                )
+                stage('Windows')
+                {
+                    agent { label 'Windows' }
+                    steps
+                    {
+                        dir('Run CMake') {
+                            sh "rm -rf *"
+                            sh "cmake -G'MSYS Makefiles' .."
+                        }
+                    }
+                }
+
+                stage('Unix')
+                {
+                    agent { label 'FreeBSD' }
+                    steps
+                    {
+                        dir('Run CMake') {
+                            sh "rm -rf *"
+                            sh "cmake -G'Unix Makefiles' .."
+                        }
+                    }
+                }
             }
         }
 
@@ -47,4 +64,3 @@ pipeline {
         }
     }
 }
-

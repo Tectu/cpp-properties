@@ -1,4 +1,4 @@
-![Build Status](https://ci.simulton.com/buildStatus/icon?job=CppProperties%2Fmaster)
+[![Build Status](https://ci.simulton.com/buildStatus/icon?job=CppProperties)](https://ci.simulton.com/job/CppProperties/)
 
 # Introduction
 This is a C++17 library providing a property system to client classes.

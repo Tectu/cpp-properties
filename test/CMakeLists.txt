@@ -22,3 +22,14 @@ target_link_libraries(
     ${TARGET}
         cppproperties-objs
 )
+
+
+###
+# CTest
+###
+enable_testing()
+
+add_test(
+    NAME doctest
+    COMMAND ${TARGET}
+)

@@ -32,7 +32,7 @@ namespace properties
         void notify()
         {
             std::for_each(std::begin(m_observers), std::end(m_observers), [](const callback& cb){
-                cb();
+                std::invoke(cb);
             });
         }
 

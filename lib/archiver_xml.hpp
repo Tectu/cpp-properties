@@ -3,6 +3,12 @@
 #include <filesystem>
 #include <ostream>
 
+namespace tinyxml2
+{
+    class XMLElement;
+    class XMLDocument;
+}
+
 namespace properties
 {
 
@@ -16,6 +22,10 @@ namespace properties
 
         static bool load(properties& p, const std::string& str);
         static std::pair<bool, std::string> load(properties& p, const std::filesystem::path& path);
+
+    private:
+        static void write_recursively(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const ::properties::properties& p);
+        static void read_recursively(tinyxml2::XMLElement& root, ::properties::properties& p);
     };
 
 }

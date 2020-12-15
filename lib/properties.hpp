@@ -11,6 +11,9 @@
 #define MAKE_PROPERTY(name, type) \
     ::properties::property<type>& name = make_property<type>(#name);
 
+#define MAKE_NESTED_PROPERTY(name, type) \
+    type& name = make_nested_property<type>(#name);
+
 #define REGISTER_PROPERTY(type, f_to_string, f_from_string)     \
     template<>                                                  \
     struct properties::property<type> :                         \
@@ -32,12 +35,19 @@
 
 namespace properties
 {
-    class properties
+    class properties :
+        public property_base
     {
         friend class archiver_xml;
 
     public:
-        properties() = default;
+        properties()
+        {
+            // Register to_string() and from_string in base class
+            property_base::to_string = std::bind(&properties::to_string, this);
+            property_base::from_string = std::bind(&properties::from_string, this);
+        }
+
         properties(const properties& other) = delete;
         properties(properties&& other) = delete;
 
@@ -57,6 +67,17 @@ namespace properties
                 throw property_exists(name);
 
             auto p = new property<T>;
+            m_properties.emplace(name, p);
+            return *p;
+        }
+
+        template<typename T>
+        T& make_nested_property(const std::string& name)
+        {
+            if (m_properties.count(name) > 0)
+                throw property_exists(name);
+
+            auto p = new T;
             m_properties.emplace(name, p);
             return *p;
         }

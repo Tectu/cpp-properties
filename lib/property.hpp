@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace cppproperties
+namespace tct::cppproperties
 {
     using callback = std::function<void()>;
 

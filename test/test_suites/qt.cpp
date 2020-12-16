@@ -3,7 +3,7 @@
 TEST_SUITE("qt")
 {
     struct foo :
-        cppproperties::properties
+        tct::cppproperties::properties
     {
         MAKE_PROPERTY(name, QString);
     };

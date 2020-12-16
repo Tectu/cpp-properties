@@ -8,7 +8,7 @@
  * Property for `std::basic_string`.
  */
 template<typename T>
-struct cppproperties::property<std::basic_string<T>> :
+struct tct::cppproperties::property<std::basic_string<T>> :
     property_impl<std::basic_string<T>>
 {
     using property_impl<std::basic_string<T>>::operator=;

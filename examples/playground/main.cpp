@@ -28,7 +28,7 @@ REGISTER_PROPERTY(
 )
 
 struct shape :
-    cppproperties::properties
+    tct::cppproperties::properties
 {
     MAKE_PROPERTY(x, int);
     MAKE_PROPERTY(f, float);

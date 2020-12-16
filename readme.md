@@ -44,7 +44,7 @@ Start by reading the `Usage` section below. More examples can be found in the [e
 Basic usage only requires inheriting from `cppproperties::properties` and adding properties using `MAKE_PROPERTY()`:
 ```cpp
 struct shape :
-    cppproperties::properties
+    tct::cppproperties::properties
 {
     MAKE_PROPERTY(x, float);
     MAKE_PROPERTY(y, float);
@@ -100,7 +100,7 @@ REGISTER_PROPERTY(
  * Client class using properties.
  */
 struct shape :
-    cppproperties::properties
+    tct::cppproperties::properties
 {
     MAKE_PROPERTY(x, float);
     MAKE_PROPERTY(y, float);
@@ -113,7 +113,7 @@ struct shape :
 Properties allow registering observers to notify them upon changes of the property value.
 ```cpp
 struct shape :
-    cppproperties::properties
+    tct::cppproperties::properties
 {
     MAKE_PROPERTY(x, float);
     MAKE_PROPERTY(y, float);
@@ -140,7 +140,7 @@ int main()
 The library comes with built-in support for (de)serialization. Classes can be easily (de)serialization to/from XML:
 ```cpp
 struct shape :
-    cppproperties::properties
+    tct::cppproperties::properties
 {
     MAKE_PROPERTY(x, float);
     MAKE_PROPERTY(y, float);

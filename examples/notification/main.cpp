@@ -3,7 +3,7 @@
 #include "../../lib/properties.hpp"
 
 struct shape :
-    cppproperties::properties
+    tct::cppproperties::properties
 {
     MAKE_PROPERTY(x, int);
     MAKE_PROPERTY(y, int);

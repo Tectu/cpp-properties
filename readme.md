@@ -24,8 +24,21 @@ This library is MIT licenses.
 
 It uses [tinyxml2](https://github.com/leethomason/tinyxml2) for serialization. The tinyxml2 library itself is zlib licensed.
 
+# Support types
+Any type can be registered as a property type using the `REGISTER_PROPERTY` macro.
+For convenience, a set of built-in types are already registered:
+- `int`
+- `float`
+- `double`
+- `std::basic_string<T>` (eg. `std::string`, `std::wstring`, ...)
+- `std::filesystem::path`
+
+If the cmake option `ENABLE_QT` is set to `ON`, the following types are also built-in:
+- `QString`
+
 # Examples
 Start by reading the `Usage` section below. More examples can be found in the [examples](examples) directory.
+
 # Usage
 Basic usage only requires inheriting from `cppproperties::properties` and adding properties using `MAKE_PROPERTY()`:
 ```cpp

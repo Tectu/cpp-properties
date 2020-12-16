@@ -12,6 +12,13 @@ The library is built with the following aspects in mind:
 - Easy registration of custom property types.
 - Observer interface for property change notifications.
 
+# Notes
+A couple of things to be aware of when using this library:
+- Requires a C++17 capable compiler
+- Properties are stored on the heap
+- The memory layout of `struct { MAKE_PROPERTY(a, int) };` is not the same as `struct { int a; };`
+- Property change notification observer callbacks are invoked by which ever thread modified the property value.
+
 # License
 This library is MIT licenses.
 

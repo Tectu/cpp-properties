@@ -19,7 +19,7 @@
 
 #define REGISTER_PROPERTY(type, f_to_string, f_from_string)     \
     template<>                                                  \
-    struct tct::cppproperties::property<type> :                      \
+    struct tct::cppproperties::property<type> :                 \
         property_impl<type>                                     \
     {                                                           \
         using property_impl<type>::operator=;                   \

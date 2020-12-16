@@ -16,7 +16,7 @@
 
 #define REGISTER_PROPERTY(type, f_to_string, f_from_string)     \
     template<>                                                  \
-    struct cppproperties::property<type> :                         \
+    struct cppproperties::property<type> :                      \
         property_impl<type>                                     \
     {                                                           \
         using property_impl<type>::operator=;                   \

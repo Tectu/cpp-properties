@@ -2,7 +2,7 @@ set(TARGET tests)
 
 add_executable(${TARGET})
 
-add_subdirectory(tests)
+add_subdirectory(test_suites)
 
 target_include_directories(
     ${TARGET}

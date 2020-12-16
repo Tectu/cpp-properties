@@ -5,6 +5,7 @@ target_sources(
         02_builtin_types_cpp.cpp
         03_nested.cpp
         attributes.cpp
+        linked_properties.cpp
 
         $<$<BOOL:${ENABLE_QT}>:${CMAKE_CURRENT_LIST_DIR}/qt.cpp>
 )

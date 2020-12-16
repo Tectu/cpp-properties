@@ -1,0 +1,54 @@
+#include "../test.hpp"
+
+struct base
+{
+    std::string name;
+    int x = 0;
+
+    bool operator==(const base& rhs) const
+    {
+        if (name != rhs.name)
+            return false;
+
+        if (x != rhs.x)
+            return false;
+
+        return true;
+    }
+};
+
+struct derived :
+    base,
+    tct::cppproperties::properties
+{
+    derived()
+    {
+        LINK_PROPERTY(name, &name);
+        LINK_PROPERTY(x, &x);
+    }
+
+    bool operator==(const derived& rhs) const
+    {
+        return base::operator==(rhs);
+    }
+};
+
+TEST_SUITE("linked properties")
+{
+    TEST_CASE("copy")
+    {
+        derived d1;
+        d1.name = "Hello CppProperties!";
+        d1.x = 42;
+
+        derived d2;
+        d2.from_xml(d1.to_xml());
+
+        // Check whether the copy was successfully
+        REQUIRE_EQ(d1, d2);
+
+        // Make sure that our comparison operators are not fucked
+        d2.x = -284;
+        REQUIRE(not (d1 == d2));
+    }
+}

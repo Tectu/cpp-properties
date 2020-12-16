@@ -11,6 +11,7 @@ The library is built with the following aspects in mind:
 - Easy integration of optional (de)serialization.
 - Easy registration of custom property types.
 - Observer interface for property change notifications.
+- Support for linked properties (properties in a base class not implementing this library).
 
 # Notes
 A couple of things to be aware of when using this library:
@@ -171,6 +172,44 @@ int main(void)
     return 0;
 }
 ```
+
+## Linked properties
+One is likely to encounter a scenario where a client class `derived` inherits from `tct::cppproperties::properties` but also from another, existing base class `base`.
+In this case serializing an instance of `derived` will only contain the properties created with `MAKE_PROPERTY`. However, one might like (or need) to also include members of the `base` class although these are not properties registered in the `base` class.
+
+An example:
+```cpp
+struct base :
+{
+    int x;
+    int y;
+};
+
+struct derived :
+    public base,
+    public tct::cppproperties::properties
+{
+    MAKE_PROPERTY(name, std::string);
+};
+```
+Serializing instances of type `derived` will contain the `name` properties but not other vital information such as X & Y coordinates which are public members of `base`. In this cae, `LINK_PROPERTY()` may be used to include them in (de)serialization too:
+```cpp
+struct base :
+{
+    int x;
+    int y;
+};
+
+struct derived :
+    public base,
+    public tct::cppproperties::properties
+{
+    MAKE_PROPERTY(name, std::string);
+    LINK_PROPERTY(x, &x);
+    LINK_PROPERTY(y, &y);
+};
+```
+
 
 # Testing
 This library provides a [doctest](https://github.com/onqtam/doctest) based test suite under `/test`. The corresponding cmake target is `tests`.

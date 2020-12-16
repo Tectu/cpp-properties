@@ -45,6 +45,22 @@ struct shape :
 
 };
 
+struct base
+{
+    int x;
+    int y;
+};
+
+struct derived :
+    base,
+    tct::cppproperties::properties
+{
+    derived()
+    {
+        LINK_PROPERTY(x, &x);
+    }
+};
+
 int main()
 {
     auto print_all = [](const shape& p) {

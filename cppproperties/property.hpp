@@ -89,6 +89,34 @@ namespace tct::cppproperties
     };
 
     template<typename T>
+    struct property_link :
+        property_base
+    {
+        T* data = nullptr;
+
+        property_link()
+        {
+            property_base::to_string = std::bind(&property_link<T>::to_string, this);
+            property_base::from_string = std::bind(&property_link<T>::from_string, this, std::placeholders::_1);
+        }
+
+    private:
+        [[nodiscard]] std::string to_string() const
+        {
+            property<T> p;
+            p.data = *data;
+            return p.to_string();
+        }
+
+        void from_string(const std::string& str)
+        {
+            property<T> p;
+            p.from_string(str);
+            *data = p.data;
+        }
+    };
+
+    template<typename T>
     constexpr T& property_cast(property_base* pb)
     {
         return dynamic_cast<property<T>*>(pb)->data;

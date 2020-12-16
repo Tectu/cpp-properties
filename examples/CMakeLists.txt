@@ -1,5 +1,6 @@
 add_subdirectory(basic)
 add_subdirectory(custom_types)
+add_subdirectory(linked_properties)
 add_subdirectory(nested)
 add_subdirectory(notification)
 add_subdirectory(playground)

@@ -14,6 +14,9 @@
 #define MAKE_NESTED_PROPERTY(name, type) \
     type& name = make_nested_property<type>(#name);
 
+#define LINK_PROPERTY(name, ptr) \
+    make_linked_property(#name, ptr);
+
 #define REGISTER_PROPERTY(type, f_to_string, f_from_string)     \
     template<>                                                  \
     struct tct::cppproperties::property<type> :                      \
@@ -45,7 +48,7 @@ namespace tct::cppproperties
         {
             // Register to_string() and from_string in base class
             property_base::to_string = std::bind(&properties::to_string, this);
-            property_base::from_string = std::bind(&properties::from_string, this);
+            property_base::from_string = std::bind(&properties::from_string, this, std::placeholders::_1);
         }
 
         properties(const properties& other) = delete;
@@ -83,6 +86,20 @@ namespace tct::cppproperties
         }
 
         template<typename T>
+        void make_linked_property(const std::string& name, T* ptr)
+        {
+            if (m_properties.count(name) > 0)
+                throw property_exists(name);
+
+            if (not ptr)
+                throw std::logic_error("ptr must not be null.");
+
+            auto p = new property_link<T>;
+            p->data = ptr;
+            m_properties.emplace(name, p);
+        }
+
+        template<typename T>
         void set_property(const std::string& name, const T& t)
         {
             if (m_properties.count(name) < 0)
@@ -113,6 +130,20 @@ namespace tct::cppproperties
             ss << "]";
 
             return ss.str();
+        }
+
+        void from_string(const std::string& str)
+        {
+            std::string::size_type pos = 0;
+
+            // Drop "[ \n"
+            pos += 3;
+
+            // ToDo: Implement this
+
+            for (auto it = std::begin(m_properties); it != std::end(m_properties); it++) {
+
+            }
         }
 
         [[nodiscard]] std::string to_xml() const

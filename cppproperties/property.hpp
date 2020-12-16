@@ -9,6 +9,12 @@ namespace tct::cppproperties
 {
     using callback = std::function<void()>;
 
+    template<typename T>
+    using setter = std::function<void(T)>;
+
+    template<typename T>
+    using getter = std::function<T()>;
+
     class properties;
 
     struct property_base
@@ -113,6 +119,37 @@ namespace tct::cppproperties
             property<T> p;
             p.from_string(str);
             *data = p.data;
+        }
+    };
+
+    template<typename T>
+    struct property_link_functions :
+        property_base
+    {
+        property_link_functions(const setter<T>& setter, const getter<T>& getter) :
+            m_setter(setter),
+            m_getter(getter)
+        {
+            property_base::to_string = std::bind(&property_link_functions<T>::to_string, this);
+            property_base::from_string = std::bind(&property_link_functions<T>::from_string, this, std::placeholders::_1);
+        }
+
+    private:
+        setter<T> m_setter;
+        getter<T> m_getter;
+
+        [[nodiscard]] std::string to_string() const
+        {
+            property<T> p;
+            p.data = m_getter();
+            return p.to_string();
+        }
+
+        void from_string(const std::string& str)
+        {
+            property<T> p;
+            p.from_string(str);
+            m_setter(p.data);
         }
     };
 

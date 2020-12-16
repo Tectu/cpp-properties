@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include <sstream>
+#include <type_traits>
 
 #include "archiver_xml.hpp"
 #include "exceptions.hpp"
@@ -16,6 +17,13 @@
 
 #define LINK_PROPERTY(name, ptr) \
     make_linked_property(#name, ptr);
+
+#define LINK_PROPERTY_FUNCTIONS(name, type, setter, getter) \
+    make_linked_property_functions<type>(                   \
+        #name,                                              \
+        std::bind(&setter, this, std::placeholders::_1),    \
+        std::bind(&getter, this)                            \
+);
 
 #define REGISTER_PROPERTY(type, f_to_string, f_from_string)     \
     template<>                                                  \
@@ -97,6 +105,22 @@ namespace tct::cppproperties
             auto p = new property_link<T>;
             p->data = ptr;
             m_properties.emplace(name, p);
+        }
+
+        template<typename T>
+        void make_linked_property_functions(const std::string& name, const setter<T>& setter, const getter<T>& getter)
+        {
+            if (m_properties.count(name) > 0)
+                throw property_exists(name);
+
+            if (not setter)
+                throw std::logic_error("setter must not be null.");
+
+            if (not getter)
+                throw std::logic_error("setter must not be null.");
+
+            auto p = new property_link_functions<T>(setter, getter);
+            m_properties.template emplace(name, p);
         }
 
         template<typename T>

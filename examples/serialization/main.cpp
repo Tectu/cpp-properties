@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../../lib/properties.hpp"
+#include "cppproperties/properties.hpp"
 
 struct shape :
     tct::cppproperties::properties

@@ -16,7 +16,7 @@ if (BUILD_EXAMPLES)
 endif()
 
 # Add the actual library
-add_subdirectory(lib)
+add_subdirectory(cppproperties)
 
 # Add tests
 add_subdirectory(test)

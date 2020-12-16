@@ -2,7 +2,7 @@
 #include <sstream>
 #include <filesystem>
 
-#include "../../lib/properties.hpp"
+#include "cppproperties/properties.hpp"
 
 struct color
 {

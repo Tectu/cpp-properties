@@ -1,4 +1,4 @@
-#include "../lib/properties.hpp"
+#include "cppproperties/properties.hpp"
 #include "doctest.hpp"
 
 struct test_shape :

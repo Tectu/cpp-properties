@@ -7,6 +7,7 @@ add_subdirectory(test_suites)
 target_include_directories(
     ${TARGET}
     PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/..
         3rdparty/doctest
 )
 

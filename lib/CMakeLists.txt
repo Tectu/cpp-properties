@@ -1,3 +1,6 @@
+# Include external dependencies
+include(external.cmake)
+
 # Variables for convenience
 set(NAME          cppproperties)
 set(TARGET_OBJ    ${NAME}-objs)
@@ -27,12 +30,24 @@ target_compile_features(
         cxx_std_17
 )
 
+target_compile_definitions(
+    ${TARGET_OBJ}
+    PUBLIC
+        $<$<BOOL:${ENABLE_QT}>:CPPPROPERTIES_ENABLE_QT>
+)
+
 target_sources(
     ${TARGET_OBJ}
     PRIVATE
         ${HEADERS_PUBLIC}
         archiver_xml.cpp
         3rdparty/tinyxml2/tinyxml2.cpp
+)
+
+target_link_libraries(
+    ${TARGET_OBJ}
+    PUBLIC
+        $<$<BOOL:${ENABLE_QT}>:Qt5::Core>
 )
 
 

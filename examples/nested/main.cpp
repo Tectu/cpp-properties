@@ -3,7 +3,7 @@
 #include "../../lib/properties.hpp"
 
 struct color :
-    properties::properties
+    cppproperties::properties
 {
     MAKE_PROPERTY(red, int);
     MAKE_PROPERTY(green, int);
@@ -22,7 +22,7 @@ struct color :
 };
 
 struct shape :
-    properties::properties
+    cppproperties::properties
 {
     MAKE_PROPERTY(x, int);
     MAKE_PROPERTY(y, int);

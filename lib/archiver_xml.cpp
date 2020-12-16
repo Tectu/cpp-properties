@@ -5,9 +5,9 @@
 #include "archiver_xml.hpp"
 #include "properties.hpp"
 
-using namespace properties;
+using namespace cppproperties;
 
-void archiver_xml::write_recursively(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const ::properties::properties& p)
+void archiver_xml::write_recursively(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const ::cppproperties::properties& p)
 {
     for (const auto& [key, value] : p.m_properties) {
         assert(not key.empty());
@@ -32,7 +32,7 @@ void archiver_xml::write_recursively(tinyxml2::XMLDocument& doc, tinyxml2::XMLEl
     }
 }
 
-void archiver_xml::read_recursively(tinyxml2::XMLElement& root, ::properties::properties& p)
+void archiver_xml::read_recursively(tinyxml2::XMLElement& root, ::cppproperties::properties& p)
 {
     // Iterate properties
     for (auto& [key, value] : p.m_properties) {

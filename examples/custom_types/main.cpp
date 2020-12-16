@@ -35,7 +35,7 @@ REGISTER_PROPERTY(
  * Our shape class that uses properties.
  */
 struct shape :
-    properties::properties
+    cppproperties::properties
 {
     MAKE_PROPERTY(x, int);
     MAKE_PROPERTY(y, int);

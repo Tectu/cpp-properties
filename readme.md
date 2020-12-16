@@ -20,10 +20,10 @@ It uses [tinyxml2](https://github.com/leethomason/tinyxml2) for serialization. T
 # Examples
 Start by reading the `Usage` section below. More examples can be found in the [examples](examples) directory.
 # Usage
-Basic usage only requires inheriting from `properties::properties` and adding properties using `MAKE_PROPERTY()`:
+Basic usage only requires inheriting from `cppproperties::properties` and adding properties using `MAKE_PROPERTY()`:
 ```cpp
 struct shape :
-    properties::properties
+    cppproperties::properties
 {
     MAKE_PROPERTY(x, float);
     MAKE_PROPERTY(y, float);
@@ -79,7 +79,7 @@ REGISTER_PROPERTY(
  * Client class using properties.
  */
 struct shape :
-    properties::properties
+    cppproperties::properties
 {
     MAKE_PROPERTY(x, float);
     MAKE_PROPERTY(y, float);
@@ -92,7 +92,7 @@ struct shape :
 Properties allow registering observers to notify them upon changes of the property value.
 ```cpp
 struct shape :
-    properties::properties
+    cppproperties::properties
 {
     MAKE_PROPERTY(x, float);
     MAKE_PROPERTY(y, float);
@@ -119,7 +119,7 @@ int main()
 The library comes with built-in support for (de)serialization. Classes can be easily (de)serialization to/from XML:
 ```cpp
 struct shape :
-    properties::properties
+    cppproperties::properties
 {
     MAKE_PROPERTY(x, float);
     MAKE_PROPERTY(y, float);

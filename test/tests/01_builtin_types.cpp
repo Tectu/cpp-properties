@@ -3,7 +3,7 @@
 TEST_CASE("built-in types")
 {
     struct :
-        properties::properties
+        cppproperties::properties
     {
         MAKE_PROPERTY(i, int);
         MAKE_PROPERTY(f, float);

@@ -9,7 +9,7 @@ namespace tinyxml2
     class XMLDocument;
 }
 
-namespace properties
+namespace cppproperties
 {
 
     class properties;
@@ -24,8 +24,8 @@ namespace properties
         static std::pair<bool, std::string> load(properties& p, const std::filesystem::path& path);
 
     private:
-        static void write_recursively(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const ::properties::properties& p);
-        static void read_recursively(tinyxml2::XMLElement& root, ::properties::properties& p);
+        static void write_recursively(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const ::cppproperties::properties& p);
+        static void read_recursively(tinyxml2::XMLElement& root, ::cppproperties::properties& p);
     };
 
 }

@@ -3,7 +3,7 @@
 TEST_CASE("built-in types")
 {
     struct :
-        properties::properties
+        cppproperties::properties
     {
         MAKE_PROPERTY(str_01, std::string);
     } s;

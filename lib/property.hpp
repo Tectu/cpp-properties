@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace properties
+namespace cppproperties
 {
     using callback = std::function<void()>;
 

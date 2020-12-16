@@ -2,7 +2,7 @@
 
 #include <stdexcept>
 
-namespace properties
+namespace cppproperties
 {
 
     struct property_nonexist :

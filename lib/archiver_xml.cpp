@@ -25,8 +25,14 @@ void archiver_xml::write_recursively(tinyxml2::XMLDocument& doc, tinyxml2::XMLEl
             write_recursively(doc, *element, *nested);
 
         // Not nested
-        else
+        else {
+            // Value
             element->SetText(value->to_string().c_str());
+
+            // Attributes
+            for (const auto& [attr_key, attr_value] : value->attributes())
+                element->SetAttribute(attr_key.c_str(), attr_value.c_str());
+        }
 
         root.InsertEndChild(element);
     }
@@ -61,6 +67,10 @@ void archiver_xml::read_recursively(tinyxml2::XMLElement& root, ::tct::cppproper
                 assert(value);
                 value->from_string(element->GetText());
             }
+
+            // Attributes
+            for (const tinyxml2::XMLAttribute* attribute = element->FirstAttribute(); attribute; attribute = attribute->Next())
+                value->set_attribute(attribute->Name(), attribute->Value());
         }
     }
 }

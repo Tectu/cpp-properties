@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <map>
 #include <string>
 #include <vector>
 
@@ -23,6 +24,25 @@ namespace tct::cppproperties
         std::function<std::string()> to_string;
         std::function<void(std::string)> from_string;
 
+        void set_attribute(const std::string& key, const std::string& value)
+        {
+            m_attributes.insert_or_assign(key, value);
+        }
+
+        [[nodiscard]] std::optional<std::string> attribute(const std::string& key) const
+        {
+            const auto& it = m_attributes.find(key);
+            if (it == std::cend(m_attributes))
+                return std::nullopt;
+
+            return it->second;
+        }
+
+        [[nodiscard]] std::map<std::string, std::string> attributes() const
+        {
+            return m_attributes;
+        }
+
         void register_observer(const callback& cb)
         {
             m_observers.push_back(cb);
@@ -37,6 +57,7 @@ namespace tct::cppproperties
         }
 
     private:
+        std::map<std::string, std::string> m_attributes;
         std::vector<callback> m_observers;
     };
 

@@ -61,7 +61,7 @@ int main(void)
   
     // Print them 
     std::cout << "s.x = " << s.x << std::endl;
-    std::cout << "s.y = " << s.x << std::endl;
+    std::cout << "s.y = " << s.y << std::endl;
 }
 ```
 

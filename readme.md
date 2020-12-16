@@ -157,3 +157,6 @@ int main(void)
     return 0;
 }
 ```
+
+# Testing
+This library provides a [doctest](https://github.com/onqtam/doctest) based test suite under `/test`. The corresponding cmake target is `tests`.

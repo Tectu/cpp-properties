@@ -27,6 +27,7 @@ It uses [tinyxml2](https://github.com/leethomason/tinyxml2) for serialization. T
 # Support types
 Any type can be registered as a property type using the `REGISTER_PROPERTY` macro.
 For convenience, a set of built-in types are already registered:
+- `bool`
 - `int`
 - `float`
 - `double`

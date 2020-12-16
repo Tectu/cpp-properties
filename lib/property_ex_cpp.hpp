@@ -22,6 +22,12 @@ struct cppproperties::property<std::basic_string<T>> :
 };
 
 REGISTER_PROPERTY(
+    bool,
+    [this](){ return (this->data ? "true" : "false"); },
+    [this](const std::string& str){ this-> data = (str == "true" or str == "True"); }
+)
+
+REGISTER_PROPERTY(
     int,
     [this](){ return std::to_string(this->data); },
     [this](const std::string& str){ this->data = std::stoi(str); }

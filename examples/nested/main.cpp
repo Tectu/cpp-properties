@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "cppproperties/properties.hpp"
+#include "cppproperties/archiver_xml.hpp"
 
 struct color :
     tct::cppproperties::properties
@@ -32,6 +33,8 @@ struct shape :
 
 int main()
 {
+    tct::cppproperties::archiver_xml ar;
+
     shape s1;
     s1.x = 13;
     s1.y = 37;
@@ -39,17 +42,17 @@ int main()
     s1.fg_color.set("00a4f3");
 
     // To XML
-    const std::string xml_str = s1.to_xml();
+    const std::string xml_str = s1.save(ar);
 
     // From XML
     shape s2;
-    s2.from_xml(xml_str);
+    s2.load(ar, xml_str);
 
     // Print
-    if (xml_str != s2.to_xml()) {
-        std::cout << "Error: XML strings do not match.";
+    if (xml_str != s2.save(ar)) {
+        std::cout << "Error: XML strings do not match.\n";
     } else
-        std::cout << s2.to_xml();
+        std::cout << s2.save(ar) << std::endl;
 
     return 0;
 }

@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "cppproperties/properties.hpp"
+#include "cppproperties/archiver_xml.hpp"
 
 struct shape :
     tct::cppproperties::properties
@@ -30,7 +31,7 @@ int main()
 
     // Print properties automatically
     std::cout << "Properties:\n";
-    std::cout << s.to_string() << std::endl;
+    std::cout << s.save(tct::cppproperties::archiver_xml()) << std::endl;
 
     return 0;
 }

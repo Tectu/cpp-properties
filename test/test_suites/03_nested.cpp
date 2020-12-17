@@ -1,6 +1,6 @@
 #include "../test.hpp"
 
-#include <iostream>
+#include "cppproperties/archiver_xml.hpp"
 
 struct color :
     tct::cppproperties::properties
@@ -57,7 +57,7 @@ TEST_CASE("nested")
             "</properties>\n";
 
         shape s;
-        std::string str = s.to_xml();
+        std::string str = s.save(tct::cppproperties::archiver_xml());
 
         // Remove spaces for easier comparison
         remove_spaces(str_known_good);
@@ -74,10 +74,13 @@ TEST_CASE("nested")
         s1.fg_color.set("012345");
         s1.bg_color.set("6789ab");
 
-        shape s2;
-        s2.from_xml(s1.to_xml());
+        // Create an XML archiver
+        tct::cppproperties::archiver_xml ar;
 
-        REQUIRE_EQ(s1.to_xml(), s2.to_xml());
+        shape s2;
+        s2.load(ar, s1.save(ar));
+
+        REQUIRE_EQ(s1.save(ar), s2.save(ar));
     }
 
 }

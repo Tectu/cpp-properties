@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "cppproperties/properties.hpp"
+#include "cppproperties/archiver_xml.hpp"
 
 struct base
 {
@@ -21,13 +22,16 @@ struct derived :
 
 int main()
 {
+    // Create an XML archiver
+    tct::cppproperties::archiver_xml ar;
+
     derived d;
     d.x = 42;
     d.y = 1337;
 
-    std::cout << d.to_string() << std::endl;
+    std::cout << d.save(ar) << std::endl;
 
     derived d2;
-    d2.from_xml(d.to_xml());
-    std::cout << d2.to_string() << std::endl;
+    d2.load(ar, d.save(ar));
+    std::cout << d2.save(ar) << std::endl;
 }

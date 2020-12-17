@@ -9,6 +9,7 @@ set(TARGET_STATIC ${NAME}-static)
 
 # List of public headers
 set(HEADERS_PUBLIC
+    archiver.hpp
     archiver_xml.hpp
     exceptions.hpp
     properties.hpp

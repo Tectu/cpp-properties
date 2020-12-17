@@ -6,7 +6,7 @@
 #include <sstream>
 #include <type_traits>
 
-#include "archiver_xml.hpp"
+#include "archiver.hpp"
 #include "exceptions.hpp"
 
 #define MAKE_PROPERTY(name, type) \
@@ -52,13 +52,7 @@ namespace tct::cppproperties
         friend class archiver_xml;
 
     public:
-        properties()
-        {
-            // Register to_string() and from_string in base class
-            property_base::to_string = std::bind(&properties::to_string, this);
-            property_base::from_string = std::bind(&properties::from_string, this, std::placeholders::_1);
-        }
-
+        properties() = default;
         properties(const properties& other) = delete;
         properties(properties&& other) = delete;
 
@@ -143,51 +137,24 @@ namespace tct::cppproperties
             }
         }
 
-        [[nodiscard]] std::string to_string() const
+        [[nodiscard]] std::string save(const archiver& ar) const
         {
-            std::stringstream ss;
-
-            ss << "[ \n";
-            for (auto it = std::cbegin(m_properties); it != std::cend(m_properties); it++) {
-                ss << "  " << it->first << ": " << it->second->to_string() << "\n";
-            }
-            ss << "]";
-
-            return ss.str();
+            return ar.save(*this);
         }
 
-        void from_string(const std::string& str)
+        [[nodiscard("file i/o might fail")]] std::pair<bool, std::string> save(const archiver& ar, const std::filesystem::path& path)
         {
-            std::string::size_type pos = 0;
-
-            // Drop "[ \n"
-            pos += 3;
-
-            // ToDo: Implement this
-
-            for (auto it = std::begin(m_properties); it != std::end(m_properties); it++) {
-
-            }
+            return ar.save(*this, path);
         }
 
-        [[nodiscard]] std::string to_xml() const
+        void load(const archiver& ar, const std::string& str)
         {
-            return archiver_xml::save(*this, false);
+            ar.load(*this, str);
         }
 
-        bool from_xml(const std::string& xml_str)
+        [[nodiscard("file i/o might fail")]] std::pair<bool, std::string> load(const archiver& ar, const std::filesystem::path& path)
         {
-            return archiver_xml::load(*this, xml_str);
-        }
-
-        std::pair<bool, std::string> to_xml_file(const std::filesystem::path& path) const
-        {
-            return archiver_xml::save(*this, path);
-        }
-
-        std::pair<bool, std::string> from_xml_file(const std::filesystem::path& path)
-        {
-            return archiver_xml::load(*this, path);
+            return ar.load(*this, path);
         }
 
     private:

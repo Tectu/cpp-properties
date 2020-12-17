@@ -1,7 +1,6 @@
 #pragma once
 
-#include <filesystem>
-#include <ostream>
+#include "archiver.hpp"
 
 namespace tinyxml2
 {
@@ -14,14 +13,12 @@ namespace tct::cppproperties
 
     class properties;
 
-    class archiver_xml
+    class archiver_xml :
+        public archiver
     {
     public:
-        [[nodiscard]] static std::string save(const properties& p, bool add_declaration = false);
-        static std::pair<bool, std::string> save(const properties& p, const std::filesystem::path& path);
-
-        static bool load(properties& p, const std::string& str);
-        static std::pair<bool, std::string> load(properties& p, const std::filesystem::path& path);
+        [[nodiscard]] std::string save(const properties& p) const override;
+        std::pair<bool, std::string> load(properties& p, const std::string& str) const override;
 
     private:
         static void write_recursively(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const ::tct::cppproperties::properties& p);

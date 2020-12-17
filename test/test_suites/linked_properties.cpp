@@ -1,4 +1,5 @@
 #include "../test.hpp"
+#include "cppproperties/archiver_xml.hpp"
 
 struct base
 {
@@ -37,12 +38,14 @@ TEST_SUITE("linked properties")
 {
     TEST_CASE("copy")
     {
+        tct::cppproperties::archiver_xml ar;
+
         derived d1;
         d1.name = "Hello CppProperties!";
         d1.x = 42;
 
         derived d2;
-        d2.from_xml(d1.to_xml());
+        d2.load(ar, d1.save(ar));
 
         // Check whether the copy was successfully
         REQUIRE_EQ(d1, d2);

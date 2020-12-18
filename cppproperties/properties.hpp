@@ -68,7 +68,7 @@ namespace tct::cppproperties
         template<typename T>
         property<T>& make_property(const std::string& name)
         {
-            if (m_properties.count(name) > 0)
+            if (m_properties.contains(name))
                 throw property_exists(name);
 
             auto p = new property<T>;
@@ -79,7 +79,7 @@ namespace tct::cppproperties
         template<typename T>
         T& make_nested_property(const std::string& name)
         {
-            if (m_properties.count(name) > 0)
+            if (m_properties.contains(name))
                 throw property_exists(name);
 
             auto p = new T;
@@ -90,7 +90,7 @@ namespace tct::cppproperties
         template<typename T>
         void make_linked_property(const std::string& name, T* ptr)
         {
-            if (m_properties.count(name) > 0)
+            if (m_properties.contains(name))
                 throw property_exists(name);
 
             if (not ptr)
@@ -104,7 +104,7 @@ namespace tct::cppproperties
         template<typename T>
         void make_linked_property_functions(const std::string& name, const setter<T>& setter, const getter<T>& getter)
         {
-            if (m_properties.count(name) > 0)
+            if (m_properties.contains(name))
                 throw property_exists(name);
 
             if (not setter)
@@ -125,7 +125,7 @@ namespace tct::cppproperties
         template<typename T>
         void set_property(const std::string& name, const T& t)
         {
-            if (m_properties.count(name) < 0)
+            if (not m_properties.contains(name))
                 throw property_nonexist(name);
 
             property_cast<T>(m_properties[name]) = t;

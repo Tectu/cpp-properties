@@ -1,7 +1,7 @@
 [![Build Status](https://ci.simulton.com/buildStatus/icon?job=CppProperties)](https://ci.simulton.com/job/CppProperties/)
 
 # Introduction
-This is a C++17 library providing a property system to client classes.
+This is a C++20 library providing a property system to client classes.
 
 # Features
 The library is built with the following aspects in mind:
@@ -15,7 +15,7 @@ The library is built with the following aspects in mind:
 
 # Notes
 A couple of things to be aware of when using this library:
-- Requires a C++17 capable compiler
+- Requires a C++20 capable compiler
 - Properties are stored on the heap
 - The memory layout of `struct { MAKE_PROPERTY(a, int) };` is not the same as `struct { int a; };`
 - Property change notification observer callbacks are invoked by which ever thread modified the property value.

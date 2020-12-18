@@ -73,9 +73,49 @@ namespace tct::cppproperties
     {
         T data = { };
 
+        property_impl<T>()
+        requires std::is_default_constructible_v<T> = default;
+
+        property_impl<T>(const property_impl<T>& other)
+        requires std::is_copy_constructible_v<T> :
+            property_base(other),
+            data(other.data)
+        {
+        }
+
+        property_impl<T>(property_impl<T>&& other) noexcept
+        requires std::is_move_constructible_v<T> :
+            property_base(std::move(other)),
+            data(std::move(other.data))
+        {
+        }
+
         property_impl<T>& operator=(const T& t)
+        requires std::is_copy_assignable_v<T>
         {
             this->data = t;
+            this->notify();
+            return *this;
+        }
+
+        property_impl<T>& operator=(const property_impl<T>& rhs)
+        requires std::is_copy_assignable_v<T>
+        {
+            data = rhs.data;
+            return *this;
+        }
+
+        property_impl<T>& operator=(property_impl<T>&& rhs) noexcept
+        requires std::is_move_assignable_v<T>
+        {
+            data = std::move(rhs.data);
+            return *this;
+        }
+
+        property_impl<T>& operator=(T&& t) noexcept
+        requires std::is_move_assignable_v<T>
+        {
+            this->data = std::move(t);
             this->notify();
             return *this;
         }

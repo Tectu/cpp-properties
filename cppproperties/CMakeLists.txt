@@ -28,7 +28,7 @@ add_library(${TARGET_OBJ} OBJECT)
 target_compile_features(
     ${TARGET_OBJ}
     PUBLIC
-        cxx_std_17
+        cxx_std_20
 )
 
 target_compile_definitions(

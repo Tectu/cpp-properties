@@ -85,7 +85,10 @@ namespace tct::cppproperties
             return this->data == t;
         }
 
-        operator T() const { return data; }
+        explicit operator T() const
+        {
+            return data;
+        }
     };
 
     template<typename T>

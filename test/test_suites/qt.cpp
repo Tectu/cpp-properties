@@ -24,4 +24,39 @@ TEST_SUITE("qt")
             REQUIRE_EQ(f.get_property<QString>("name"), QString("Test 123"));
         }
     }
+
+    TEST_CASE("QPoint")
+    {
+        struct foo :
+            tct::cppproperties::properties
+        {
+            MAKE_PROPERTY(point, QPoint);
+        };
+
+        SUBCASE("raw")
+        {
+            foo f;
+            f.point = { -17, 24 };
+            REQUIRE_EQ(f.point.data.x(), -17);
+            REQUIRE_EQ(f.point.data.y(), 24);
+        }
+
+        SUBCASE("to string")
+        {
+            foo f;
+            f.point = { -17, 24 };
+
+            const std::string& str = f.point.to_string();
+            REQUIRE_EQ(str, "-17;24");
+        }
+
+        SUBCASE("from string")
+        {
+            foo f;
+
+            REQUIRE_NOTHROW(f.point.from_string("14;-38"));
+            REQUIRE_EQ(f.point.data.x(), 14);
+            REQUIRE_EQ(f.point.data.y(), -38);
+        }
+    }
 }

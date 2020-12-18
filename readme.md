@@ -8,8 +8,8 @@ The library is built with the following aspects in mind:
 - Modern C++
 - Easy to use
 - Providing "raw access" to the properties just as if they were regular class members.
-- Easy integration of optional (de)serialization.
 - Easy registration of custom property types.
+- Easy integration of optional (de)serialization (XML & JSON already optionally built-in).
 - Observer interface for property change notifications.
 - Support for linked properties (properties in a base class not implementing this library).
 
@@ -37,6 +37,7 @@ For convenience, a set of built-in types are already registered:
 
 If the cmake option `ENABLE_QT` is set to `ON`, the following types are also built-in:
 - `QString`
+- `QPoint`
 
 # Examples
 Start by reading the `Usage` section below. More examples can be found in the [examples](examples) directory.

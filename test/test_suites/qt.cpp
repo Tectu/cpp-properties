@@ -23,6 +23,22 @@ TEST_SUITE("qt")
             f.set_property("name", QString("Test 123"));
             REQUIRE_EQ(f.get_property<QString>("name"), QString("Test 123"));
         }
+
+        SUBCASE("to string")
+        {
+            foo f;
+            f.name = "Hello World!";
+            std::string str;
+            REQUIRE_NOTHROW(str = f.name.to_string());
+            REQUIRE_EQ(str, "Hello World!");
+        }
+
+        SUBCASE("from string")
+        {
+            foo f;
+            REQUIRE_NOTHROW(f.name.from_string("Hello World!"));
+            REQUIRE_EQ(f.name, QString{"Hello World!"});
+        }
     }
 
     TEST_CASE("QPoint")

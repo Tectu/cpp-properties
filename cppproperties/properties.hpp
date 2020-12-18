@@ -117,6 +117,11 @@ namespace tct::cppproperties
             m_properties.template emplace(name, p);
         }
 
+        [[nodiscard]] std::size_t properties_count() const noexcept
+        {
+            return m_properties.size();
+        }
+
         template<typename T>
         void set_property(const std::string& name, const T& t)
         {

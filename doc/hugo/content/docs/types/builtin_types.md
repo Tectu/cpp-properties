@@ -5,7 +5,6 @@ title: "Built-in types"
 ---
 
 # Built-in types
-Any type can be registered as a property type using the `REGISTER_PROPERTY` macro.
 For convenience, a set of built-in types are already registered:
 - `bool`
 - `int`
@@ -17,3 +16,7 @@ For convenience, a set of built-in types are already registered:
 If the cmake option `ENABLE_QT` is set to `ON`, the following types are also built-in:
 - `QString`
 - `QPoint`
+
+
+## Custom types
+Any type can be registered as a property type. See [custom types](./custom_types.md) for more information.

@@ -1,5 +1,7 @@
 [![Build Status](https://ci.simulton.com/buildStatus/icon?job=CppProperties)](https://ci.simulton.com/job/CppProperties/)
 
+This is just a summarizing readme providing the most vital information. The official documentation can be found at https://cppproperties.silizium.io.
+
 # Introduction
 This is a C++20 library providing a property system to client classes.
 

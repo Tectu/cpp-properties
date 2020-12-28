@@ -49,22 +49,8 @@ namespace tct::cppproperties
             return m_attributes;
         }
 
-        void register_observer(const callback& cb)
-        {
-            m_observers.push_back(cb);
-        }
-
-    protected:
-        void notify()
-        {
-            std::for_each(std::begin(m_observers), std::end(m_observers), [](const callback& cb){
-                std::invoke(cb);
-            });
-        }
-
     private:
         std::map<std::string, std::string> m_attributes;
-        std::vector<callback> m_observers;
     };
 
     template<typename T>
@@ -129,6 +115,22 @@ namespace tct::cppproperties
         {
             return data;
         }
+
+        void register_observer(const callback& cb)
+        {
+            m_observers.push_back(cb);
+        }
+
+    protected:
+        void notify()
+        {
+            std::for_each(std::begin(m_observers), std::end(m_observers), [](const callback& cb){
+                std::invoke(cb);
+            });
+        }
+
+    private:
+        std::vector<callback> m_observers;
     };
 
     template<typename T>

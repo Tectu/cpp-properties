@@ -49,6 +49,7 @@ namespace tct::cppproperties
     class properties :
         public property_base
     {
+        friend class archiver_json;
         friend class archiver_xml;
 
     public:

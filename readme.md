@@ -25,7 +25,8 @@ A couple of things to be aware of when using this library:
 # License
 This library is MIT licenses.
 
-It uses [tinyxml2](https://github.com/leethomason/tinyxml2) for serialization. The tinyxml2 library itself is zlib licensed.
+- If JSON (de)serialization is enabled, [nlohmann::json](https://github.com/nlohmann/json) is used for JSON serialization. The json library itself is MIT licensed.
+- If XML (de)serialization is enabled, [tinyxml2](https://github.com/leethomason/tinyxml2) is used for XML serialization. The tinyxml2 library itself is zlib licensed.
 
 # Support types
 Any type can be registered as a property type using the `REGISTER_PROPERTY` macro.

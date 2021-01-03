@@ -10,6 +10,7 @@ set(TARGET_STATIC ${NAME}-static)
 # List of public headers
 set(HEADERS_PUBLIC
     archiver.hpp
+    $<$<BOOL:${ENABLE_JSON}>:archiver_json.hpp>
     $<$<BOOL:${ENABLE_XML}>:archiver_xml.hpp>
     exceptions.hpp
     properties.hpp
@@ -44,6 +45,7 @@ target_sources(
     PRIVATE
         dummy.cpp
         ${HEADERS_PUBLIC}
+        $<$<BOOL:${ENABLE_JSON}>:archiver_json.cpp>
         $<$<BOOL:${ENABLE_XML}>:archiver_xml.cpp>
         $<$<BOOL:${ENABLE_XML}>:3rdparty/tinyxml2/tinyxml2.cpp>
 )

@@ -7,8 +7,9 @@ project(
     HOMEPAGE_URL "https://github.com/text/cppproperties"
 )
 
-option(ENABLE_QT "Whether to enable built-in support for Qt types" OFF)
-option(BUILD_EXAMPLES "Whether to build examples" ON)
+option(ENABLE_QT "Whether to enable built-in support for Qt types." OFF)
+option(ENABLE_XML "Whether to enable XML (de)serialization." ON)
+option(BUILD_EXAMPLES "Whether to build examples." ON)
 
 # Include examples (if supposed to)
 if (BUILD_EXAMPLES)

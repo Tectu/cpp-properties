@@ -10,7 +10,7 @@ set(TARGET_STATIC ${NAME}-static)
 # List of public headers
 set(HEADERS_PUBLIC
     archiver.hpp
-    archiver_xml.hpp
+    $<$<BOOL:${ENABLE_XML}>:archiver_xml.hpp>
     exceptions.hpp
     properties.hpp
     property.hpp
@@ -40,9 +40,10 @@ target_compile_definitions(
 target_sources(
     ${TARGET_OBJ}
     PRIVATE
+        dummy.cpp
         ${HEADERS_PUBLIC}
-        archiver_xml.cpp
-        3rdparty/tinyxml2/tinyxml2.cpp
+        $<$<BOOL:${ENABLE_XML}>:archiver_xml.cpp>
+        $<$<BOOL:${ENABLE_XML}>:3rdparty/tinyxml2/tinyxml2.cpp>
 )
 
 target_link_libraries(

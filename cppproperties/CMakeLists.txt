@@ -38,6 +38,8 @@ target_compile_definitions(
     PUBLIC
         $<$<BOOL:${ENABLE_BOOST}>:CPPPROPERTIES_ENABLE_BOOST>
         $<$<BOOL:${ENABLE_QT}>:CPPPROPERTIES_ENABLE_QT>
+        $<$<BOOL:${ENABLE_JSON}>:CPPPROPERTIES_ENABLE_JSON>
+        $<$<BOOL:${ENABLE_XML}>:CPPPROPERTIES_ENABLE_XML>
 )
 
 target_sources(

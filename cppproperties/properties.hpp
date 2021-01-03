@@ -49,8 +49,12 @@ namespace tct::cppproperties
     class properties :
         public property_base
     {
-        friend class archiver_json;
-        friend class archiver_xml;
+        #ifdef CPPPROPERTIES_ENABLE_JSON
+            friend class archiver_json;
+        #endif
+        #ifdef CPPPROPERTIES_ENABLE_XML
+            friend class archiver_xml;
+        #endif
 
     public:
         properties() = default;

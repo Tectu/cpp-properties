@@ -9,3 +9,11 @@ if (ENABLE_QT)
             widgets
     )
 endif()
+
+# Boost
+if (ENABLE_BOOST)
+    find_package(
+        Boost
+        REQUIRED
+    )
+endif()

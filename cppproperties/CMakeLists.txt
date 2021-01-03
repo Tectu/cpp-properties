@@ -16,7 +16,8 @@ set(HEADERS_PUBLIC
     property.hpp
     property_ex.hpp
     property_ex_cpp.hpp
-    property_ex_cpp_modern.hpp
+    $<$<BOOL:${ENABLE_BOOST}>:property_ex_boost.hpp>
+    $<$<BOOL:${ENABLE_QT}>:property_ex_cpp_modern.hpp>
 )
 
 ################################################################################
@@ -34,6 +35,7 @@ target_compile_features(
 target_compile_definitions(
     ${TARGET_OBJ}
     PUBLIC
+        $<$<BOOL:${ENABLE_BOOST}>:CPPPROPERTIES_ENABLE_BOOST>
         $<$<BOOL:${ENABLE_QT}>:CPPPROPERTIES_ENABLE_QT>
 )
 

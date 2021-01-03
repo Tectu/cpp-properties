@@ -10,15 +10,15 @@ set(TARGET_STATIC ${NAME}-static)
 # List of public headers
 set(HEADERS_PUBLIC
     archiver.hpp
-    $<$<BOOL:${ENABLE_JSON}>:archiver_json.hpp>
-    $<$<BOOL:${ENABLE_XML}>:archiver_xml.hpp>
+    $<$<BOOL:${ENABLE_JSON}>:${CMAKE_CURRENT_LIST_DIR}/archiver_json.hpp>
+    $<$<BOOL:${ENABLE_XML}>:${CMAKE_CURRENT_LIST_DIR}/archiver_xml.hpp>
     exceptions.hpp
     properties.hpp
     property.hpp
     property_ex.hpp
     property_ex_cpp.hpp
-    $<$<BOOL:${ENABLE_BOOST}>:property_ex_boost.hpp>
-    $<$<BOOL:${ENABLE_QT}>:property_ex_cpp_modern.hpp>
+    $<$<BOOL:${ENABLE_BOOST}>:${CMAKE_CURRENT_LIST_DIR}/property_ex_boost.hpp>
+    $<$<BOOL:${ENABLE_QT}>:${CMAKE_CURRENT_LIST_DIR}/property_ex_cpp_modern.hpp>
 )
 
 ################################################################################

@@ -12,6 +12,7 @@ set(HEADERS_PUBLIC
     archiver.hpp
     $<$<BOOL:${ENABLE_JSON}>:${CMAKE_CURRENT_LIST_DIR}/archiver_json.hpp>
     $<$<BOOL:${ENABLE_XML}>:${CMAKE_CURRENT_LIST_DIR}/archiver_xml.hpp>
+    $<$<BOOL:${ENABLE_GPDS}>:${CMAKE_CURRENT_LIST_DIR}/archiver_gpds.hpp>
     exceptions.hpp
     properties.hpp
     property.hpp
@@ -40,6 +41,7 @@ target_compile_definitions(
         $<$<BOOL:${ENABLE_QT}>:CPPPROPERTIES_ENABLE_QT>
         $<$<BOOL:${ENABLE_JSON}>:CPPPROPERTIES_ENABLE_JSON>
         $<$<BOOL:${ENABLE_XML}>:CPPPROPERTIES_ENABLE_XML>
+        $<$<BOOL:${ENABLE_GPDS}>:CPPPROPERTIES_ENABLE_GPDS>
 )
 
 target_sources(
@@ -50,12 +52,14 @@ target_sources(
         $<$<BOOL:${ENABLE_JSON}>:archiver_json.cpp>
         $<$<BOOL:${ENABLE_XML}>:archiver_xml.cpp>
         $<$<BOOL:${ENABLE_XML}>:3rdparty/tinyxml2/tinyxml2.cpp>
+        $<$<BOOL:${ENABLE_XML}>:archiver_gpds.cpp>
 )
 
 target_link_libraries(
     ${TARGET_OBJ}
     PUBLIC
         $<$<BOOL:${ENABLE_QT}>:Qt5::Core>
+        $<$<BOOL:${ENABLE_GPDS}>:gpds-static>
 )
 
 

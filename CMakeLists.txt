@@ -11,6 +11,7 @@ option(ENABLE_BOOST "Whether to enable built-in support for common boost types."
 option(ENABLE_QT "Whether to enable built-in support for Qt types." OFF)
 option(ENABLE_JSON "Whether to enable JSON (de)serialization." ON)
 option(ENABLE_XML "Whether to enable XML (de)serialization." ON)
+option(ENABLE_GPDS "Whether to enable GPDS (de)serialization." OFF)
 option(BUILD_EXAMPLES "Whether to build examples." ON)
 
 # Include examples (if supposed to)

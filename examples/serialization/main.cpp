@@ -26,13 +26,25 @@ int main()
     s1.name = "My Shape";
 
     // Serialize to XML file
-    s1.save(ar, "shape.xml");
+    {
+        const auto& [success, message] = s1.save(ar, "shape.xml");
+        if (not success) {
+            std::cout << "Could not save to file: " << message << std::endl;
+            return EXIT_FAILURE;
+        }
+    }
 
     // Create another object
     shape s2;
 
     // Deserialize from XML file
-    s2.load(ar, std::filesystem::path{ "shape.xml" });
+    {
+        const auto& [success, message] = s2.load(ar, std::filesystem::path{"shape.xml"});
+        if (not success) {
+            std::cout << "Could not save to file: " << message << std::endl;
+            return EXIT_FAILURE;
+        }
+    }
 
     // Print both s1 and s2 as XML strings
     std::cout << s1.save(ar) << "\n";

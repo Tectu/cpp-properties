@@ -90,9 +90,7 @@ void archiver_gpds::read_recursively(const gpds::container& root, ::tct::cppprop
 
         // Not nested
         else {
-            if (const std::string& str = v.get<std::string>(); not str.empty()) {
-                value->from_string(str);
-            }
+            value->from_string(v.to_string());
 
             // Attributes
             for (const auto& [attr_key, attr_value] : v.attributes.map)

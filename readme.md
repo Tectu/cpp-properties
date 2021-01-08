@@ -49,10 +49,10 @@ If the cmake option `ENABLE_QT` is set to `ON`, the following types are also bui
 Start by reading the `Usage` section below. More examples can be found in the [examples](examples) directory.
 
 # Usage
-Basic usage only requires inheriting from `cppproperties::properties` and adding properties using `MAKE_PROPERTY()`:
+Basic usage only requires inheriting from `tct::properties::properties` and adding properties using `MAKE_PROPERTY()`:
 ```cpp
 struct shape :
-    tct::cppproperties::properties
+    tct::properties::properties
 {
     MAKE_PROPERTY(x, float);
     MAKE_PROPERTY(y, float);
@@ -108,7 +108,7 @@ REGISTER_PROPERTY(
  * Client class using properties.
  */
 struct shape :
-    tct::cppproperties::properties
+    tct::properties::properties
 {
     MAKE_PROPERTY(x, float);
     MAKE_PROPERTY(y, float);
@@ -121,7 +121,7 @@ struct shape :
 Properties allow registering observers to notify them upon changes of the property value.
 ```cpp
 struct shape :
-    tct::cppproperties::properties
+    tct::properties::properties
 {
     MAKE_PROPERTY(x, float);
     MAKE_PROPERTY(y, float);
@@ -148,7 +148,7 @@ int main()
 The library comes with built-in support for (de)serialization. Classes can be easily (de)serialization to/from XML:
 ```cpp
 struct shape :
-    tct::cppproperties::properties
+    tct::properties::properties
 {
     MAKE_PROPERTY(x, float);
     MAKE_PROPERTY(y, float);
@@ -181,7 +181,7 @@ int main(void)
 ```
 
 ## Linked properties
-One is likely to encounter a scenario where a client class `derived` inherits from `tct::cppproperties::properties` but also from another, existing base class `base`.
+One is likely to encounter a scenario where a client class `derived` inherits from `tct::properties::properties` but also from another, existing base class `base`.
 In this case serializing an instance of `derived` will only contain the properties created with `MAKE_PROPERTY`. However, one might like (or need) to also include members of the `base` class although these are not properties registered in the `base` class.
 
 An example:
@@ -194,7 +194,7 @@ struct base :
 
 struct derived :
     public base,
-    public tct::cppproperties::properties
+    public tct::properties::properties
 {
     MAKE_PROPERTY(name, std::string);
 };
@@ -209,7 +209,7 @@ struct base :
 
 struct derived :
     public base,
-    public tct::cppproperties::properties
+    public tct::properties::properties
 {
     MAKE_PROPERTY(name, std::string);
     LINK_PROPERTY(x, &x);

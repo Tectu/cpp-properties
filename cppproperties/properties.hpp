@@ -10,7 +10,7 @@
 #include "exceptions.hpp"
 
 #define MAKE_PROPERTY(name, type) \
-    ::tct::cppproperties::property<type>& name = make_property<type>(#name);
+    ::tct::properties::property<type>& name = make_property<type>(#name);
 
 #define MAKE_NESTED_PROPERTY(name, type) \
     type& name = make_nested_property<type>(#name);
@@ -27,7 +27,7 @@
 
 #define REGISTER_PROPERTY(type, f_to_string, f_from_string)     \
     template<>                                                  \
-    struct tct::cppproperties::property<type> :                 \
+    struct tct::properties::property<type> :                 \
         property_impl<type>                                     \
     {                                                           \
         using property_impl<type>::operator=;                   \
@@ -44,7 +44,7 @@
 #include "property.hpp"
 #include "property_ex.hpp"
 
-namespace tct::cppproperties
+namespace tct::properties
 {
     class properties :
         public property_base

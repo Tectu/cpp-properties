@@ -5,7 +5,7 @@ namespace gpds
     class container;
 }
 
-namespace tct::cppproperties
+namespace tct::properties
 {
     class properties;
 
@@ -16,7 +16,7 @@ namespace tct::cppproperties
         std::pair<bool, std::string> load(properties&p, const gpds::container& c) const;
 
     private:
-        static void write_recursively(gpds::container& root, const ::tct::cppproperties::properties& p);
-        static void read_recursively(const gpds::container& root, ::tct::cppproperties::properties& p);
+        static void write_recursively(gpds::container& root, const ::tct::properties::properties& p);
+        static void read_recursively(const gpds::container& root, ::tct::properties::properties& p);
     };
 }

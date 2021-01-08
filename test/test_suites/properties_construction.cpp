@@ -1,6 +1,6 @@
 #include "../test.hpp"
 
-using namespace tct::cppproperties;
+using namespace tct::properties;
 
 struct p_copyable :
     properties

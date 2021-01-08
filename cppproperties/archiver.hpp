@@ -4,7 +4,7 @@
 #include <fstream>
 #include <sstream>
 
-namespace tct::cppproperties
+namespace tct::properties
 {
 
     class properties;

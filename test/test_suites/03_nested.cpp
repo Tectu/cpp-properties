@@ -3,7 +3,7 @@
 #include "cppproperties/archiver_xml.hpp"
 
 struct color :
-    tct::cppproperties::properties
+    tct::properties::properties
 {
     MAKE_PROPERTY(red, int);
     MAKE_PROPERTY(green, int);
@@ -22,7 +22,7 @@ struct color :
 };
 
 struct shape :
-    tct::cppproperties::properties
+    tct::properties::properties
 {
     MAKE_PROPERTY(x, int);
     MAKE_PROPERTY(y, int);
@@ -57,7 +57,7 @@ TEST_CASE("nested")
             "</properties>\n";
 
         shape s;
-        std::string str = s.save(tct::cppproperties::archiver_xml());
+        std::string str = s.save(tct::properties::archiver_xml());
 
         // Remove spaces for easier comparison
         remove_spaces(str_known_good);
@@ -75,7 +75,7 @@ TEST_CASE("nested")
         s1.bg_color.set("6789ab");
 
         // Create an XML archiver
-        tct::cppproperties::archiver_xml ar;
+        tct::properties::archiver_xml ar;
 
         shape s2;
         s2.load(ar, s1.save(ar));

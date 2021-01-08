@@ -7,7 +7,7 @@
 #include "cppproperties/archiver_gpds.hpp"
 
 struct shape :
-    tct::cppproperties::properties
+    tct::properties::properties
 {
     MAKE_PROPERTY(locked, bool);
     MAKE_PROPERTY(x, int);
@@ -25,7 +25,7 @@ int main()
     s.set_attribute("foobar", "zbar");
     s.name.set_attribute("name-attr", "test1234");
 
-    tct::cppproperties::archiver_gpds ar;
+    tct::properties::archiver_gpds ar;
     const gpds::container& c = ar.save(s);
 
     std::stringstream ss;

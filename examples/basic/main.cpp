@@ -4,7 +4,7 @@
 #include "cppproperties/archiver_xml.hpp"
 
 struct shape :
-    tct::cppproperties::properties
+    tct::properties::properties
 {
     MAKE_PROPERTY(locked, bool);
     MAKE_PROPERTY(x, int);
@@ -31,7 +31,7 @@ int main()
 
     // Print properties automatically
     std::cout << "Properties:\n";
-    std::cout << s.save(tct::cppproperties::archiver_xml()) << std::endl;
+    std::cout << s.save(tct::properties::archiver_xml()) << std::endl;
 
     return 0;
 }

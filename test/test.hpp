@@ -2,7 +2,7 @@
 #include "doctest.hpp"
 
 struct test_shape :
-    tct::cppproperties::properties
+    tct::properties::properties
 {
     MAKE_PROPERTY(name, std::string);
     MAKE_PROPERTY(x, int);

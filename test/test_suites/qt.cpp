@@ -3,7 +3,7 @@
 TEST_SUITE("qt")
 {
     struct foo :
-        tct::cppproperties::properties
+        tct::properties::properties
     {
         MAKE_PROPERTY(name, QString);
     };
@@ -44,7 +44,7 @@ TEST_SUITE("qt")
     TEST_CASE("QPoint")
     {
         struct foo :
-            tct::cppproperties::properties
+            tct::properties::properties
         {
             MAKE_PROPERTY(point, QPoint);
         };

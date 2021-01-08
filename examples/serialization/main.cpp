@@ -4,7 +4,7 @@
 #include "cppproperties/archiver_xml.hpp"
 
 struct shape :
-    tct::cppproperties::properties
+    tct::properties::properties
 {
     MAKE_PROPERTY(x, int);
     MAKE_PROPERTY(y, int);
@@ -14,7 +14,7 @@ struct shape :
 int main()
 {
     // Create an XML archiver
-    tct::cppproperties::archiver_xml ar;
+    tct::properties::archiver_xml ar;
 
     // Create object
     shape s1;

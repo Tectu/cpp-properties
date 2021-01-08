@@ -8,7 +8,7 @@ namespace tinyxml2
     class XMLDocument;
 }
 
-namespace tct::cppproperties
+namespace tct::properties
 {
 
     class properties;
@@ -21,8 +21,8 @@ namespace tct::cppproperties
         std::pair<bool, std::string> load(properties& p, const std::string& str) const override;
 
     private:
-        static void write_recursively(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const ::tct::cppproperties::properties& p);
-        static void read_recursively(tinyxml2::XMLElement& root, ::tct::cppproperties::properties& p);
+        static void write_recursively(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const ::tct::properties::properties& p);
+        static void read_recursively(tinyxml2::XMLElement& root, ::tct::properties::properties& p);
     };
 
 }

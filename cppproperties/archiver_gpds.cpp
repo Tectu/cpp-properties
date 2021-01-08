@@ -3,7 +3,7 @@
 #include "archiver_gpds.hpp"
 #include "properties.hpp"
 
-using namespace tct::cppproperties;
+using namespace tct::properties;
 
 gpds::container archiver_gpds::save(const properties& p) const
 {
@@ -23,7 +23,7 @@ std::pair<bool, std::string> archiver_gpds::load(properties& p, const gpds::cont
     return { true, "success." };
 }
 
-void archiver_gpds::write_recursively(gpds::container& root, const ::tct::cppproperties::properties& p)
+void archiver_gpds::write_recursively(gpds::container& root, const ::tct::properties::properties& p)
 {
     // Values
     for (const auto& [key, value] : p.m_properties) {
@@ -61,7 +61,7 @@ void archiver_gpds::write_recursively(gpds::container& root, const ::tct::cpppro
         root.add_attribute(attr_key.c_str(), attr_value);
 }
 
-void archiver_gpds::read_recursively(const gpds::container& root, ::tct::cppproperties::properties& p)
+void archiver_gpds::read_recursively(const gpds::container& root, ::tct::properties::properties& p)
 {
     // Iterate properties
     for (auto& [key, value] : p.m_properties) {

@@ -3,7 +3,7 @@
 TEST_CASE("built-in types")
 {
     struct :
-        tct::cppproperties::properties
+        tct::properties::properties
     {
         MAKE_PROPERTY(str_01, std::string);
     } s;

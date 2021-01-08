@@ -15,7 +15,7 @@ private:
 
 struct derived :
     base,
-    tct::cppproperties::properties
+    tct::properties::properties
 {
     derived()
     {
@@ -26,7 +26,7 @@ struct derived :
 int main()
 {
     // Create an XML archiver
-    tct::cppproperties::archiver_xml ar;
+    tct::properties::archiver_xml ar;
 
     derived d1;
     d1.set_x(42);

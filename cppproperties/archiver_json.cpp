@@ -3,7 +3,7 @@
 #include "archiver_json.hpp"
 #include "properties.hpp"
 
-using namespace tct::cppproperties;
+using namespace tct::properties;
 
 std::string archiver_json::save(const properties& p) const
 {

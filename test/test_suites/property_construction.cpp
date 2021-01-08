@@ -1,6 +1,6 @@
 #include "../test.hpp"
 
-using namespace tct::cppproperties;
+using namespace tct::properties;
 
 TEST_SUITE("property construction")
 {

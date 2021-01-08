@@ -20,7 +20,7 @@ struct base
 
 struct derived :
     base,
-    tct::cppproperties::properties
+    tct::properties::properties
 {
     derived()
     {
@@ -38,7 +38,7 @@ TEST_SUITE("linked properties")
 {
     TEST_CASE("copy")
     {
-        tct::cppproperties::archiver_xml ar;
+        tct::properties::archiver_xml ar;
 
         derived d1;
         d1.name = "Hello CppProperties!";

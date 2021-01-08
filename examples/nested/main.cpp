@@ -4,7 +4,7 @@
 #include "cppproperties/archiver_xml.hpp"
 
 struct color :
-    tct::cppproperties::properties
+    tct::properties::properties
 {
     MAKE_PROPERTY(red, int);
     MAKE_PROPERTY(green, int);
@@ -23,7 +23,7 @@ struct color :
 };
 
 struct shape :
-    tct::cppproperties::properties
+    tct::properties::properties
 {
     MAKE_PROPERTY(x, int);
     MAKE_PROPERTY(y, int);
@@ -33,7 +33,7 @@ struct shape :
 
 int main()
 {
-    tct::cppproperties::archiver_xml ar;
+    tct::properties::archiver_xml ar;
 
     shape s1;
     s1.x = 13;

@@ -6,7 +6,7 @@
 
 TEST_SUITE("serialization - json")
 {
-    tct::cppproperties::archiver_json ar;
+    tct::properties::archiver_json ar;
 
     TEST_CASE("serialize")
     {

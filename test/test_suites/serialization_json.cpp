@@ -14,6 +14,6 @@ TEST_SUITE("serialization - json")
 
         const std::string& json_str = ar.save(dut);
 
-        std::cout << json_str << std::endl;
+        //std::cout << json_str << std::endl;
     }
 }

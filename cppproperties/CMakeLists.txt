@@ -52,7 +52,7 @@ target_sources(
         $<$<BOOL:${ENABLE_JSON}>:archiver_json.cpp>
         $<$<BOOL:${ENABLE_XML}>:archiver_xml.cpp>
         $<$<BOOL:${ENABLE_XML}>:3rdparty/tinyxml2/tinyxml2.cpp>
-        $<$<BOOL:${ENABLE_XML}>:archiver_gpds.cpp>
+        $<$<BOOL:${ENABLE_GPDS}>:archiver_gpds.cpp>
 )
 
 target_link_libraries(

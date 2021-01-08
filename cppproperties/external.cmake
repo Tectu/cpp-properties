@@ -1,3 +1,5 @@
+include(FetchContent)
+
 # Qt5
 if (ENABLE_QT)
     find_package(
@@ -16,4 +18,14 @@ if (ENABLE_BOOST)
         Boost
         REQUIRED
     )
+endif()
+
+# GPDS
+if (ENABLE_GPDS)
+    FetchContent_Declare(
+        gpds
+        GIT_REPOSITORY https://github.com/simulton/gpds
+        GIT_TAG        master
+    )
+    FetchContent_MakeAvailable(gpds)
 endif()

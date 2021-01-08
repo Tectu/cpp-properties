@@ -1,5 +1,6 @@
 add_subdirectory(basic)
 add_subdirectory(custom_types)
+add_subdirectory(gpds)
 add_subdirectory(linked_properties)
 add_subdirectory(linked_property_functions)
 add_subdirectory(nested)

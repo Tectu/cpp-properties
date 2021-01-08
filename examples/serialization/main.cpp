@@ -18,6 +18,7 @@ int main()
 
     // Create object
     shape s1;
+    s1.set_attribute("foobar", "zbar");
     s1.x = 24;
     s1.x.set_attribute("units", "px");
     s1.y = 48;

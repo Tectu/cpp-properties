@@ -1,14 +1,22 @@
 #pragma once
 
-#include "archiver.hpp"
+namespace gpds
+{
+    class container;
+}
 
 namespace tct::cppproperties
 {
-    class archiver_gpds :
-        public archiver
+    class properties;
+
+    class archiver_gpds
     {
     public:
-        [[nodiscard]] std::string save(const properties& p) const override;
-        std::pair<bool, std::string> load(properties& p, const std::string& str) const override;
+        [[nodiscard]] gpds::container save(const properties& p) const;
+        std::pair<bool, std::string> load(properties&p, const gpds::container& c) const;
+
+    private:
+        static void write_recursively(gpds::container& root, const ::tct::cppproperties::properties& p);
+        static void read_recursively(const gpds::container& root, ::tct::cppproperties::properties& p);
     };
 }

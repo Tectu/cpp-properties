@@ -1,4 +1,4 @@
-[![Build Status](https://ci.simulton.com/buildStatus/icon?job=CppProperties)](https://ci.simulton.com/job/CppProperties/)
+[![Build Status](https://ci.simulton.com/buildStatus/icon?job=cpp-properties)](https://ci.simulton.com/job/cpp-properties/)
 
 This is just a summarizing readme providing the most vital information. The official documentation can be found at https://cppproperties.silizium.io.
 

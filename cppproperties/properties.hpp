@@ -49,9 +49,6 @@ namespace tct::properties
     class properties :
         public property_base
     {
-        #ifdef CPPPROPERTIES_ENABLE_JSON
-            friend class archiver_json;
-        #endif
         #ifdef CPPPROPERTIES_ENABLE_XML
             friend class archiver_xml;
         #endif
@@ -72,6 +69,16 @@ namespace tct::properties
 
         properties& operator=(const properties& rhs) = delete;
         properties& operator=(properties&& rhs) noexcept = delete;
+
+        /**
+         * Iterators
+         */
+        auto begin() { return m_properties.begin(); }
+        auto begin() const { return m_properties.begin(); }
+        auto end() { return m_properties.end(); }
+        auto end() const { return m_properties.end(); }
+        auto cbegin() const { return m_properties.cbegin(); }
+        auto cend() const { return m_properties.cend(); }
 
         template<typename T>
         property<T>& make_property(const std::string& name)

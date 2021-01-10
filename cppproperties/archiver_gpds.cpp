@@ -26,7 +26,7 @@ std::pair<bool, std::string> archiver_gpds::load(properties& p, const gpds::cont
 void archiver_gpds::write_recursively(gpds::container& root, const ::tct::properties::properties& p)
 {
     // Values
-    for (const auto& [key, value] : p.m_properties) {
+    for (const auto& [key, value] : p) {
         assert(not key.empty());
         assert(value);
 
@@ -64,7 +64,7 @@ void archiver_gpds::write_recursively(gpds::container& root, const ::tct::proper
 void archiver_gpds::read_recursively(const gpds::container& root, ::tct::properties::properties& p)
 {
     // Iterate properties
-    for (auto& [key, value] : p.m_properties) {
+    for (auto& [key, value] : p) {
         // Get GPDS container element
         assert(root.values.count(key) == 1);
         const auto& it = root.values.find(key);

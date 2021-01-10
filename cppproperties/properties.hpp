@@ -73,6 +73,11 @@ namespace tct::properties
         properties& operator=(const properties& rhs) = delete;
         properties& operator=(properties&& rhs) noexcept = delete;
 
+        auto begin() { return m_properties.begin(); }
+        auto end() { return m_properties.end(); }
+        auto cbegin() const { return m_properties.cbegin(); }
+        auto cend() const { return m_properties.cend(); }
+
         template<typename T>
         property<T>& make_property(const std::string& name)
         {

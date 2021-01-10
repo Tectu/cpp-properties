@@ -6,6 +6,7 @@ target_sources(
         attributes.cpp
         properties_construction.cpp
         property_construction.cpp
+        iterable.cpp
 
         $<$<BOOL:${ENABLE_BOOST}>:${CMAKE_CURRENT_LIST_DIR}/boost.cpp>
         $<$<BOOL:${ENABLE_QT}>:${CMAKE_CURRENT_LIST_DIR}/qt.cpp>

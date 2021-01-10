@@ -49,7 +49,7 @@ std::pair<bool, std::string> archiver_xml::load(properties& p, const std::string
 
 void archiver_xml::write_recursively(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const ::tct::properties::properties& p)
 {
-    for (const auto& [key, value] : p.m_properties) {
+    for (const auto& [key, value] : p) {
         assert(not key.empty());
         assert(value);
 
@@ -91,7 +91,7 @@ void archiver_xml::read_recursively(tinyxml2::XMLElement& root, ::tct::propertie
         p.set_attribute(attribute->Name(), attribute->Value());
 
     // Iterate properties
-    for (auto& [key, value] : p.m_properties) {
+    for (auto& [key, value] : p) {
         tinyxml2::XMLElement* element = root.FirstChildElement(key.c_str());
         if (not element)
             continue;

@@ -9,7 +9,7 @@ std::string archiver_json::save(const properties& p) const
 {
     nlohmann::json json;
 
-    for (const auto& [key, value] : p.m_properties) {
+    for (const auto& [key, value] : p) {
         json[key] = value->to_string();
     }
 

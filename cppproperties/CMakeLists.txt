@@ -22,11 +22,28 @@ set(HEADERS_PUBLIC
     $<$<BOOL:${ENABLE_QT}>:${CMAKE_CURRENT_LIST_DIR}/property_ex_cpp_modern.hpp>
 )
 
+set(HEADERS_QT_WIDGETS_PUBLIC
+    qt_widgets/factory.hpp
+    qt_widgets/boolean.hpp
+)
+
+set(SOURCES_QT_WIDGETS_PRIVATE
+    qt_widgets/boolean.cpp
+)
+
 ################################################################################
 # Object library                                                               #
 ################################################################################
 
 add_library(${TARGET_OBJ} OBJECT)
+
+if (ENABLE_QT_WIDGETS)
+    set_target_properties(
+        ${TARGET_OBJ}
+        PROPERTIES
+            AUTOMOC ON
+    )
+endif()
 
 target_compile_features(
     ${TARGET_OBJ}
@@ -39,6 +56,7 @@ target_compile_definitions(
     PUBLIC
         $<$<BOOL:${ENABLE_BOOST}>:CPPPROPERTIES_ENABLE_BOOST>
         $<$<BOOL:${ENABLE_QT}>:CPPPROPERTIES_ENABLE_QT>
+        $<$<BOOL:${ENABLE_QT_WIDGETS}>:CPPPROPERTIES_ENABLE_QT_WIDGETS>
         $<$<BOOL:${ENABLE_JSON}>:CPPPROPERTIES_ENABLE_JSON>
         $<$<BOOL:${ENABLE_XML}>:CPPPROPERTIES_ENABLE_XML>
         $<$<BOOL:${ENABLE_GPDS}>:CPPPROPERTIES_ENABLE_GPDS>
@@ -53,12 +71,16 @@ target_sources(
         $<$<BOOL:${ENABLE_XML}>:archiver_xml.cpp>
         $<$<BOOL:${ENABLE_XML}>:3rdparty/tinyxml2/tinyxml2.cpp>
         $<$<BOOL:${ENABLE_GPDS}>:archiver_gpds.cpp>
+        $<$<BOOL:${ENABLE_QT_WIDGETS}>:${HEADERS_QT_WIDGETS_PUBLIC}>
+        $<$<BOOL:${ENABLE_QT_WIDGETS}>:${SOURCES_QT_WIDGETS_PRIVATE}>
 )
 
 target_link_libraries(
     ${TARGET_OBJ}
     PUBLIC
         $<$<BOOL:${ENABLE_QT}>:Qt5::Core>
+        $<$<BOOL:${ENABLE_QT_WIDGETS}>:Qt5::Gui>
+        $<$<BOOL:${ENABLE_QT_WIDGETS}>:Qt5::Widgets>
         $<$<BOOL:${ENABLE_GPDS}>:gpds-static>
 )
 

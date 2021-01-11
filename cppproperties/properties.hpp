@@ -49,13 +49,6 @@ namespace tct::properties
     class properties :
         public property_base
     {
-        #ifdef CPPPROPERTIES_ENABLE_XML
-            friend class archiver_xml;
-        #endif
-        #ifdef CPPPROPERTIES_ENABLE_GPDS
-            friend class archiver_gpds;
-        #endif
-
     public:
         properties() = default;
         properties(const properties& other) = delete;

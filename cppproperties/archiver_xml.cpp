@@ -99,13 +99,9 @@ void archiver_xml::read_recursively(tinyxml2::XMLElement& root, ::tct::propertie
         // Check if nested
         if (not element->GetText()) {
             // Find the nested properties
-            const std::string& property_name = element->Name();
-            auto it = p.m_properties.find(property_name);
-            if (it == std::cend(p.m_properties))
-                throw property_nonexist(property_name);
-            properties* nested = dynamic_cast<properties*>(it->second);
+            properties* nested = p.get_nested_properties(key);
             if (not nested)
-                throw std::runtime_error("Could not retrieve nested property \"" + property_name + "\".");
+                throw std::runtime_error("Could not retrieve nested property \"" + key + "\".");
 
             read_recursively(*element, *nested);
         }

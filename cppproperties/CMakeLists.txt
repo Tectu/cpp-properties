@@ -25,10 +25,12 @@ set(HEADERS_PUBLIC
 set(HEADERS_QT_WIDGETS_PUBLIC
     qt_widgets/factory.hpp
     qt_widgets/boolean.hpp
+    qt_widgets/integer.hpp
 )
 
 set(SOURCES_QT_WIDGETS_PRIVATE
     qt_widgets/boolean.cpp
+    qt_widgets/integer.cpp
 )
 
 ################################################################################

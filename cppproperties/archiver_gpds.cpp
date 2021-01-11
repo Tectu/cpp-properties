@@ -74,13 +74,9 @@ void archiver_gpds::read_recursively(const gpds::container& root, ::tct::propert
         // Check if nested
         if (v.is_type<gpds::container*>()) {
             // Find the nested properties
-            const std::string& property_name = key;
-            auto it = p.m_properties.find(property_name);
-            if (it == std::cend(p.m_properties))
-                throw property_nonexist(property_name);
-            properties* nested = dynamic_cast<properties*>(it->second);
+            properties* nested = p.get_nested_properties(key);
             if (not nested)
-                throw std::runtime_error("Could not retrieve nested property \"" + property_name + "\".");
+                throw std::runtime_error("Could not retrieve nested property \"" + key + "\".");
 
             // Get the nested GPDS container
             const gpds::container* cc = v.get<gpds::container*>();

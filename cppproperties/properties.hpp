@@ -157,6 +157,15 @@ namespace tct::properties
             }
         }
 
+        [[nodiscard]] properties* get_nested_properties(const std::string& name)
+        {
+            auto it = m_properties.find(name);
+            if (it == std::cend(m_properties))
+                throw property_nonexist(name);
+
+            return dynamic_cast<properties*>(it->second);
+        }
+
         [[nodiscard]] std::string save(const archiver& ar) const
         {
             return ar.save(*this);

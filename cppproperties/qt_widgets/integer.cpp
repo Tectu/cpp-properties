@@ -2,6 +2,7 @@
 
 using namespace tct::properties::qt_widgets;
 
-integer::integer()
+integer::integer(tct::properties::property<type>& p) :
+    widget_base(p)
 {
 }

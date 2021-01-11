@@ -24,8 +24,10 @@ set(HEADERS_PUBLIC
 
 set(HEADERS_QT_WIDGETS_PUBLIC
     qt_widgets/factory.hpp
+    qt_widgets/widget_base.hpp
     qt_widgets/boolean.hpp
     qt_widgets/integer.hpp
+    qt_widgets/nested.hpp
 )
 
 set(SOURCES_QT_WIDGETS_PRIVATE

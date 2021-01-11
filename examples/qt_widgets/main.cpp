@@ -14,15 +14,22 @@ struct shape :
     MAKE_PROPERTY(y, int);
 };
 
+struct circle :
+    shape
+{
+    MAKE_PROPERTY(radius, int);
+};
+
 int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
 
-    shape s;
+    circle s;
 
     // Set some property values
     s.x = 24;
     s.y = 48;
+    s.radius = 14;
 
     // Create widget
     auto w = tct::properties::qt_widgets::factory::build_form(s);

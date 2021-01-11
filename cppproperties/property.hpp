@@ -15,8 +15,6 @@ namespace tct::properties
     template<typename T>
     using getter = std::function<T()>;
 
-    class properties;
-
     struct property_base
     {
         property_base() = default;

@@ -13,6 +13,7 @@ option(ENABLE_JSON "Whether to enable JSON (de)serialization." ON)
 option(ENABLE_XML "Whether to enable XML (de)serialization." ON)
 option(ENABLE_GPDS "Whether to enable GPDS (de)serialization." OFF)
 option(BUILD_EXAMPLES "Whether to build examples." ON)
+option(PERFORM_CPPCHECK "Whether to run cppcheck." OFF)
 
 # Include examples (if supposed to)
 if (BUILD_EXAMPLES)
@@ -25,17 +26,19 @@ add_subdirectory(cppproperties)
 # Add tests
 add_subdirectory(test)
 
-#find_program(CMAKE_CXX_CPPCHECK NAMES cppcheck)
-#if (CMAKE_CXX_CPPCHECK)
-#    list(
-#            APPEND CMAKE_CXX_CPPCHECK
-#            "--enable=warning"
-#            "--inconclusive"
-#            "--force"
-#            "--inline-suppr"
-#            "--suppressions-list=${CMAKE_SOURCE_DIR}/CppCheckSuppressions.txt"
-#    )
-#endif()
+if (PERFORM_CPPCHECK)
+    find_program(CMAKE_CXX_CPPCHECK NAMES cppcheck)
+    if (CMAKE_CXX_CPPCHECK)
+        list(
+            APPEND CMAKE_CXX_CPPCHECK
+            "--enable=warning"
+            "--inconclusive"
+            "--force"
+            "--inline-suppr"
+            "--suppressions-list=${CMAKE_SOURCE_DIR}/CppCheckSuppressions.txt"
+        )
+    endif()
+endif()
 
 # Print some information
 message("-----------------------")

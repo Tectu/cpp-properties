@@ -85,6 +85,7 @@ namespace tct::properties
         }
 
         template<typename T>
+        requires std::derived_from<T, properties>
         T& make_nested_property(const std::string& name)
         {
             if (m_properties.contains(name))

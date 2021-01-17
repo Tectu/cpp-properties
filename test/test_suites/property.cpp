@@ -2,7 +2,7 @@
 
 using namespace tct::properties;
 
-TEST_SUITE("property construction")
+TEST_SUITE("property")
 {
     TEST_CASE("copy ctor")
     {

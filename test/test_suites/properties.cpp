@@ -44,7 +44,7 @@ struct p_non_movable :
     MAKE_PROPERTY(p, non_movable);
 };
 
-TEST_SUITE("properties construction")
+TEST_SUITE("properties")
 {
     TEST_CASE("copy ctor")
     {

@@ -46,6 +46,9 @@
 
 namespace tct::properties
 {
+    /**
+     * A container for zero or more properties.
+     */
     class properties :
         public property_base
     {
@@ -73,6 +76,13 @@ namespace tct::properties
         auto cbegin() const { return m_properties.cbegin(); }
         auto cend() const { return m_properties.cend(); }
 
+        /**
+         * Create a new property.
+         *
+         * @tparam T The type of property.
+         * @param name The name of the property.
+         * @return A reference to the newly created property.
+         */
         template<typename T>
         property<T>& make_property(const std::string& name)
         {
@@ -84,6 +94,13 @@ namespace tct::properties
             return *p;
         }
 
+        /**
+         * Create a nested property.
+         *
+         * @tparam T
+         * @param name
+         * @return
+         */
         template<typename T>
         requires std::derived_from<T, properties>
         T& make_nested_property(const std::string& name)

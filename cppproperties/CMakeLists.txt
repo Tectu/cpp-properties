@@ -44,6 +44,12 @@ target_compile_definitions(
         $<$<BOOL:${ENABLE_GPDS}>:CPPPROPERTIES_ENABLE_GPDS>
 )
 
+target_include_directories(
+    ${TARGET_OBJ}
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/..>
+)
+
 target_sources(
     ${TARGET_OBJ}
     PRIVATE

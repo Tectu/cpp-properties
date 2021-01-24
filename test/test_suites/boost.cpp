@@ -5,7 +5,7 @@
 TEST_SUITE("boost")
 {
     struct foo :
-        tct::cppproperties::properties
+        tct::properties::properties
     {
         MAKE_PROPERTY(id, boost::uuids::uuid);
     };

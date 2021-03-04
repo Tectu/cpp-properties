@@ -41,7 +41,8 @@ if (PERFORM_CPPCHECK)
 endif()
 
 # Print some information
-message("-----------------------")
+message("----------------------------")
+message("cpp-properties configuration")
 message("Types:")
 message("  Boost: " ${ENABLE_BOOST})
 message("  Qt   : " ${ENABLE_QT})
@@ -50,7 +51,7 @@ message("Serialization:")
 message("  JSON : " ${ENABLE_JSON})
 message("  XML  : " ${ENABLE_XML})
 message("  GPDS : " ${ENABLE_GPDS})
-message("-----------------------")
+message("----------------------------")
 
 
 ################################################################################

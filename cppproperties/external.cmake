@@ -25,7 +25,7 @@ if (ENABLE_GPDS)
     FetchContent_Declare(
         gpds
         GIT_REPOSITORY https://github.com/simulton/gpds
-        GIT_TAG        master
+        GIT_TAG        1.0.1
     )
     FetchContent_GetProperties(gpds)
     if(NOT gpds_POPULATED)

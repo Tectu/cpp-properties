@@ -1,7 +1,7 @@
 include(FetchContent)
 
 # Qt5
-if (ENABLE_QT)
+if (CPPPROPERTIES_ENABLE_QT)
     find_package(
         Qt5
         REQUIRED
@@ -9,7 +9,7 @@ if (ENABLE_QT)
             core
     )
 endif()
-if (ENABLE_QT_WIDGETS)
+if (CPPPROPERTIES_ENABLE_QT_WIDGETS)
     find_package(
         Qt5
         REQUIRED
@@ -20,7 +20,7 @@ if (ENABLE_QT_WIDGETS)
 endif()
 
 # Boost
-if (ENABLE_BOOST)
+if (CPPPROPERTIESENABLE_BOOST)
     find_package(
         Boost
         REQUIRED
@@ -28,7 +28,7 @@ if (ENABLE_BOOST)
 endif()
 
 # GPDS
-if (ENABLE_GPDS)
+if (CPPPROPERTIES_ENABLE_GPDS)
     FetchContent_Declare(
         gpds
         GIT_REPOSITORY https://github.com/simulton/gpds

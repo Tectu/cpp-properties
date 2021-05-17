@@ -7,16 +7,17 @@ project(
     HOMEPAGE_URL "https://github.com/text/cppproperties"
 )
 
-option(ENABLE_BOOST "Whether to enable built-in support for common boost types." OFF)
-option(ENABLE_QT "Whether to enable built-in support for Qt types." OFF)
-option(ENABLE_JSON "Whether to enable JSON (de)serialization." ON)
-option(ENABLE_XML "Whether to enable XML (de)serialization." ON)
-option(ENABLE_GPDS "Whether to enable GPDS (de)serialization." OFF)
-option(BUILD_EXAMPLES "Whether to build examples." ON)
-option(PERFORM_CPPCHECK "Whether to run cppcheck." OFF)
+# User options
+option(CPPPROPERTIES_ENABLE_BOOST       "Whether to enable built-in support for common boost types." OFF)
+option(CPPPROPERTIES_ENABLE_QT          "Whether to enable built-in support for Qt types." OFF)
+option(CPPPROPERTIES_ENABLE_JSON        "Whether to enable JSON (de)serialization." ON)
+option(CPPPROPERTIES_ENABLE_XML         "Whether to enable XML (de)serialization." ON)
+option(CPPPROPERTIES_ENABLE_GPDS        "Whether to enable GPDS (de)serialization." OFF)
+option(CPPPROPERTIES_BUILD_EXAMPLES     "Whether to build examples." ON)
+option(CPPPROPERTIES_PERFORM_CPPCHECK   "Whether to run cppcheck." OFF)
 
 # Include examples (if supposed to)
-if (BUILD_EXAMPLES)
+if (CPPPROPERTIES_BUILD_EXAMPLES)
     add_subdirectory(examples)
 endif()
 
@@ -26,7 +27,7 @@ add_subdirectory(cppproperties)
 # Add tests
 add_subdirectory(test)
 
-if (PERFORM_CPPCHECK)
+if (CPPPROPERTIES_PERFORM_CPPCHECK)
     find_program(CMAKE_CXX_CPPCHECK NAMES cppcheck)
     if (CMAKE_CXX_CPPCHECK)
         list(
@@ -44,13 +45,13 @@ endif()
 message("----------------------------")
 message("cpp-properties configuration")
 message("Types:")
-message("  Boost: " ${ENABLE_BOOST})
-message("  Qt   : " ${ENABLE_QT})
+message("  Boost: " ${CPPPROPERTIES_ENABLE_BOOST})
+message("  Qt   : " ${CPPPROPERTIES_ENABLE_QT})
 message("")
 message("Serialization:")
-message("  JSON : " ${ENABLE_JSON})
-message("  XML  : " ${ENABLE_XML})
-message("  GPDS : " ${ENABLE_GPDS})
+message("  JSON : " ${CPPPROPERTIES_ENABLE_JSON})
+message("  XML  : " ${CPPPROPERTIES_ENABLE_XML})
+message("  GPDS : " ${CPPPROPERTIES_ENABLE_GPDS})
 message("----------------------------")
 
 

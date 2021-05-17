@@ -1,6 +1,6 @@
 add_subdirectory(basic)
 add_subdirectory(custom_types)
-if (ENABLE_GPDS)
+if (CPPPROPERTIES_ENABLE_GPDS)
     add_subdirectory(gpds)
 endif()
 add_subdirectory(linked_properties)

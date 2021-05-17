@@ -10,16 +10,16 @@ set(TARGET_STATIC ${NAME}-static)
 # List of public headers
 set(HEADERS_PUBLIC
     archiver.hpp
-    $<$<BOOL:${ENABLE_JSON}>:${CMAKE_CURRENT_LIST_DIR}/archiver_json.hpp>
-    $<$<BOOL:${ENABLE_XML}>:${CMAKE_CURRENT_LIST_DIR}/archiver_xml.hpp>
-    $<$<BOOL:${ENABLE_GPDS}>:${CMAKE_CURRENT_LIST_DIR}/archiver_gpds.hpp>
+    $<$<BOOL:${CPPPROPERTIES_ENABLE_JSON}>:${CMAKE_CURRENT_LIST_DIR}/archiver_json.hpp>
+    $<$<BOOL:${CPPPROPERTIES_ENABLE_XML}>:${CMAKE_CURRENT_LIST_DIR}/archiver_xml.hpp>
+    $<$<BOOL:${CPPPROPERTIES_ENABLE_GPDS}>:${CMAKE_CURRENT_LIST_DIR}/archiver_gpds.hpp>
     exceptions.hpp
     properties.hpp
     property.hpp
     property_ex.hpp
     property_ex_cpp.hpp
-    $<$<BOOL:${ENABLE_BOOST}>:${CMAKE_CURRENT_LIST_DIR}/property_ex_boost.hpp>
-    $<$<BOOL:${ENABLE_QT}>:${CMAKE_CURRENT_LIST_DIR}/property_ex_cpp_modern.hpp>
+    $<$<BOOL:${CPPPROPERTIES_ENABLE_BOOST}>:${CMAKE_CURRENT_LIST_DIR}/property_ex_boost.hpp>
+    $<$<BOOL:${CPPPROPERTIES_ENABLE_QT}>:${CMAKE_CURRENT_LIST_DIR}/property_ex_cpp_modern.hpp>
 )
 
 # This function sets stuff up common to all targets
@@ -33,11 +33,11 @@ function(setup_target_common target)
     target_compile_definitions(
         ${target}
         PUBLIC
-            $<$<BOOL:${ENABLE_BOOST}>:CPPPROPERTIES_ENABLE_BOOST>
-            $<$<BOOL:${ENABLE_QT}>:CPPPROPERTIES_ENABLE_QT>
-            $<$<BOOL:${ENABLE_JSON}>:CPPPROPERTIES_ENABLE_JSON>
-            $<$<BOOL:${ENABLE_XML}>:CPPPROPERTIES_ENABLE_XML>
-            $<$<BOOL:${ENABLE_GPDS}>:CPPPROPERTIES_ENABLE_GPDS>
+            $<$<BOOL:${CPPPROPERTIES_ENABLE_BOOST}>:CPPPROPERTIES_ENABLE_BOOST>
+            $<$<BOOL:${CPPPROPERTIES_ENABLE_QT}>:CPPPROPERTIES_ENABLE_QT>
+            $<$<BOOL:${CPPPROPERTIES_ENABLE_JSON}>:CPPPROPERTIES_ENABLE_JSON>
+            $<$<BOOL:${CPPPROPERTIES_ENABLE_XML}>:CPPPROPERTIES_ENABLE_XML>
+            $<$<BOOL:${CPPPROPERTIES_ENABLE_GPDS}>:CPPPROPERTIES_ENABLE_GPDS>
     )
 
     target_sources(
@@ -45,17 +45,17 @@ function(setup_target_common target)
         PRIVATE
             dummy.cpp
             ${HEADERS_PUBLIC}
-            $<$<BOOL:${ENABLE_JSON}>:archiver_json.cpp>
-            $<$<BOOL:${ENABLE_XML}>:archiver_xml.cpp>
-            $<$<BOOL:${ENABLE_XML}>:3rdparty/tinyxml2/tinyxml2.cpp>
-            $<$<BOOL:${ENABLE_GPDS}>:archiver_gpds.cpp>
+            $<$<BOOL:${CPPPROPERTIES_ENABLE_JSON}>:archiver_json.cpp>
+            $<$<BOOL:${CPPPROPERTIES_ENABLE_XML}>:archiver_xml.cpp>
+            $<$<BOOL:${CPPPROPERTIES_ENABLE_XML}>:3rdparty/tinyxml2/tinyxml2.cpp>
+            $<$<BOOL:${CPPPROPERTIES_ENABLE_GPDS}>:archiver_gpds.cpp>
     )
 
     target_link_libraries(
         ${target}
         PUBLIC
-            $<$<BOOL:${ENABLE_QT}>:Qt5::Core>
-            $<$<BOOL:${ENABLE_GPDS}>:gpds-static>
+            $<$<BOOL:${CPPPROPERTIES_ENABLE_QT}>:Qt5::Core>
+            $<$<BOOL:${CPPPROPERTIES_ENABLE_GPDS}>:gpds-static>
     )
 
     set_target_properties(

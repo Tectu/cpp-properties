@@ -14,6 +14,7 @@ The library is built with the following aspects in mind:
 - Easy integration of optional (de)serialization (XML & JSON already optionally built-in).
 - Observer interface for property change notifications.
 - Support for linked properties (properties in a base class not implementing this library).
+- GUI generator (Qt widgets)
 
 # Notes
 A couple of things to be aware of when using this library:
@@ -217,6 +218,62 @@ struct derived :
 };
 ```
 
+## Qt Widgets
+If `CPPPROPERTIES_ENABLE_QT_WIDGETS` is set to `ON`, Qt based widgets can be generated automatically for a property or a property group:
+```cpp
+#include <iostream>
+
+#include <QApplication>
+#include <QWidget>
+
+#include "cppproperties/properties.hpp"
+#include "cppproperties/qt_widgets/factory.hpp"
+
+struct shape :
+    tct::properties::properties
+{
+    MAKE_PROPERTY(enabled, bool);
+    MAKE_PROPERTY(x, int);
+    MAKE_PROPERTY(y, int);
+
+    shape()
+    {
+        enabled.register_observer([](){ std::cout << "enabled changed!\n"; });
+        x.register_observer([](){ std::cout << "x changed!\n"; });
+        y.register_observer([](){ std::cout << "x changed!\n"; });
+    }
+};
+
+struct circle :
+    shape
+{
+    MAKE_PROPERTY(radius, int);
+
+    circle()
+    {
+        radius.register_observer([](){ std::cout << "radius channged!\n"; });
+    }
+};
+
+int main(int argc, char* argv[])
+{
+    QApplication a(argc, argv);
+
+    circle s;
+
+    // Set some property values
+    s.x = 24;
+    s.y = 48;
+    s.radius = 14;
+
+    // Create widget
+    auto w = tct::properties::qt_widgets::factory::build_form(s);
+    if (w)
+        w->show();
+
+    return a.exec();
+}
+```
 
 # Testing
 This library provides a [doctest](https://github.com/onqtam/doctest) based test suite under `/test`. The corresponding cmake target is `tests`.

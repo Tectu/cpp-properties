@@ -58,17 +58,17 @@ namespace tct::properties
     {
         T data = { };
 
-        property_impl<T>()
+        property_impl()
         requires std::is_default_constructible_v<T> = default;
 
-        property_impl<T>(const property_impl<T>& other)
+        property_impl(const property_impl<T>& other)
         requires std::is_copy_constructible_v<T> :
             property_base(other),
             data(other.data)
         {
         }
 
-        property_impl<T>(property_impl<T>&& other) noexcept
+        property_impl(property_impl<T>&& other) noexcept
         requires std::is_move_constructible_v<T> :
             property_base(std::move(other)),
             data(std::move(other.data))

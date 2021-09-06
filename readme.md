@@ -24,7 +24,7 @@ A couple of things to be aware of when using this library:
 - Property change notification observer callbacks are invoked by which ever thread modified the property value.
 
 # License
-This library is MIT licenses.
+This library is MIT licensed.
 
 - If JSON (de)serialization is enabled, [nlohmann::json](https://github.com/nlohmann/json) is used for JSON serialization. The json library itself is MIT licensed.
 - If XML (de)serialization is enabled, [tinyxml2](https://github.com/leethomason/tinyxml2) is used for XML serialization. The tinyxml2 library itself is zlib licensed.
@@ -183,11 +183,11 @@ int main(void)
 
 ## Linked properties
 One is likely to encounter a scenario where a client class `derived` inherits from `tct::properties::properties` but also from another, existing base class `base`.
-In this case serializing an instance of `derived` will only contain the properties created with `MAKE_PROPERTY`. However, one might like (or need) to also include members of the `base` class although these are not properties registered in the `base` class.
+In this case serializing an instance of `derived` will only contain the properties created with `MAKE_PROPERTY`. However, one might like (or need) to also include members of the `base` class although these members are not registered as properties in the `base` class.
 
 An example:
 ```cpp
-struct base :
+struct base
 {
     int x;
     int y;

@@ -218,6 +218,32 @@ struct derived :
 };
 ```
 
+## Linked functions (getter/setter)
+This is similar to `Linked properties` but instead of directly accessing a base class member we use the corresponding getter & setters. This way, members from a base class only accessible via getters & setters can be included in (de)serialization.
+
+An example:
+```cpp
+struct base
+{
+public:
+    void set_x(const int x) { m_x = x; }
+    [[nodiscard]] int x() const { return m_x; }
+
+private:
+    int m_x = 0;
+};
+
+struct derived :
+    base,
+    tct::properties::properties
+{
+    derived()
+    {
+        LINK_PROPERTY_FUNCTIONS(x, int, base::set_x, base::x)
+    }
+};
+```
+
 ## Qt Widgets
 If `CPPPROPERTIES_ENABLE_QT_WIDGETS` is set to `ON`, Qt based widgets can be generated automatically for a property or a property group:
 ```cpp

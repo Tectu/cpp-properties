@@ -48,10 +48,11 @@ TEST_SUITE("linked properties")
         d2.load(ar, d1.save(ar));
 
         // Check whether the copy was successfully
-        REQUIRE_EQ(d1, d2);
+        CHECK_EQ(d1, d2);
 
         // Make sure that our comparison operators are not fucked
         d2.x = -284;
-        REQUIRE(not (d1 == d2));
+        CHECK(d1 != d2);
     }
 }
+

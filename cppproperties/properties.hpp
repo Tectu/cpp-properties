@@ -28,7 +28,7 @@
 
 #define REGISTER_PROPERTY(type, f_to_string, f_from_string)     \
     template<>                                                  \
-    struct tct::properties::property<type> :                 \
+    struct tct::properties::property<type> :                    \
         property_impl<type>                                     \
     {                                                           \
         using property_impl<type>::operator=;                   \
@@ -54,11 +54,19 @@ namespace tct::properties
         public property_base
     {
     public:
+		/**
+		 * Default constructor.
+		 */
         properties() = default;
+
         properties(const properties& other) = delete;
         properties(properties&& other) = delete;
 
-        virtual ~properties()
+		/**
+		 * Destructor.
+		 */
+        virtual
+		~properties()
         {
             for (auto& [key, value] : m_properties)
                 delete value;
@@ -69,6 +77,8 @@ namespace tct::properties
 
         /**
          * Iterators
+		 *
+		 * @{
          */
         auto begin() { return m_properties.begin(); }
         auto begin() const { return m_properties.begin(); }
@@ -76,6 +86,9 @@ namespace tct::properties
         auto end() const { return m_properties.end(); }
         auto cbegin() const { return m_properties.cbegin(); }
         auto cend() const { return m_properties.cend(); }
+		/**
+		 * @}
+		 */
 
         /**
          * Create a new property.
@@ -98,9 +111,9 @@ namespace tct::properties
         /**
          * Create a nested property.
          *
-         * @tparam T
-         * @param name
-         * @return
+         * @tparam T The type of property.
+         * @param name The name of the property.
+         * @return A reference to the newly created property.
          */
         template<typename T>
         requires std::derived_from<T, properties>
@@ -114,6 +127,14 @@ namespace tct::properties
             return *p;
         }
 
+		/**
+		 * Create a linked property.
+		 *
+		 * @tparam T The type of property.
+		 * @param name The name of the property.
+		 * @param ptr Pointer to the value.
+		 * @return A reference to the newly created property.
+		 */
         template<typename T>
         void make_linked_property(const std::string& name, T* ptr)
         {
@@ -128,6 +149,14 @@ namespace tct::properties
             m_properties.emplace(name, p);
         }
 
+		/**
+		 * Create a linked functions property.
+		 *
+		 * @tparam T The type of property.
+		 * @param name The name of the property.
+		 * @param setter The setter function.
+		 * @param getter The getter function.
+		 */
         template<typename T>
         void make_linked_property_functions(const std::string& name, const setter<T>& setter, const getter<T>& getter)
         {
@@ -144,13 +173,28 @@ namespace tct::properties
             m_properties.template emplace(name, p);
         }
 
-        [[nodiscard]] std::size_t properties_count() const noexcept
+		/**
+		 * Get the number of properties.
+		 *
+		 * @return The number of properties.
+		 */
+        [[nodiscard]]
+		std::size_t
+		properties_count() const noexcept
         {
             return m_properties.size();
         }
 
+		/**
+		 * Set the value of a specific property.
+		 *
+		 * @tparam T The property type.
+		 * @param name The name of the property.
+		 * @param t The value to be set.
+		 */
         template<typename T>
-        void set_property(const std::string& name, const T& t)
+        void
+		set_property(const std::string& name, const T& t)
         {
             if (not m_properties.contains(name))
                 throw property_nonexist(name);
@@ -158,8 +202,19 @@ namespace tct::properties
             property_cast<T>(m_properties[name]) = t;
         }
 
+		/**
+		 * Get the value of a specific property.
+		 *
+		 * @throw @p property_nonexist if no property exists with the specified name.
+		 *
+		 * @tparam T The property type.
+		 * @param name The name of the property.
+		 * @return The value of the property.
+		 */
         template<typename T>
-        [[nodiscard]] const T& get_property(const std::string& name) const
+        [[nodiscard]]
+		const T&
+		get_property(const std::string& name) const
         {
             try {
                 return property_cast<T>(m_properties.at(name));
@@ -169,7 +224,19 @@ namespace tct::properties
             }
         }
 
-        [[nodiscard]] properties* get_nested_properties(const std::string& name)
+		/**
+		 * Get a group of nested properties.
+		 *
+		 * @note The returned pointer is guaranteed not to be null.
+		 *
+		 * @throw @p @p property_nonexist if no properties group exists with the specified name.
+		 *
+		 * @param The name of the properties group.
+		 * @return The corresponding properties group.
+		 */
+        [[nodiscard]]
+		properties*
+		get_nested_properties(const std::string& name)
         {
             auto it = m_properties.find(name);
             if (it == std::cend(m_properties))
@@ -178,22 +245,55 @@ namespace tct::properties
             return dynamic_cast<properties*>(it->second);
         }
 
-        [[nodiscard]] std::string save(const archiver& ar) const
+		/**
+		 * Serialize properties to string.
+		 *
+		 * @param ar The archiver to use.
+		 * @return The serialized string.
+		 */
+        [[nodiscard]]
+		std::string
+		save(const archiver& ar) const
         {
             return ar.save(*this);
         }
 
-        [[nodiscard("file i/o might fail")]] std::pair<bool, std::string> save(const archiver& ar, const std::filesystem::path& path)
+		/**
+		 * Serialize properties to file.
+		 *
+		 * @param ar The archiver to use.
+		 * @param path The file path.
+		 * @return @p true if successful, @p false otherwise with optional error message.
+		 */
+        [[nodiscard("file i/o might fail")]]
+		std::pair<bool, std::string>
+		save(const archiver& ar, const std::filesystem::path& path)
         {
             return ar.save(*this, path);
         }
 
-        void load(const archiver& ar, const std::string& str)
+		/**
+		 * Deserialize properties from string.
+		 *
+		 * @param ar The archiver to use.
+		 * @param str The string to deserialize.
+		 */
+        void
+		load(const archiver& ar, const std::string& str)
         {
             ar.load(*this, str);
         }
 
-        [[nodiscard("file i/o might fail")]] std::pair<bool, std::string> load(const archiver& ar, const std::filesystem::path& path)
+		/**
+		 * Deserialize properties from file.
+		 *
+		 * @param ar The archiver to use.
+		 * @path The file path.
+		 * @return @p true on success, @p false otherwise with optional error message.
+		 */
+        [[nodiscard("file i/o might fail")]]
+		std::pair<bool, std::string>
+		load(const archiver& ar, const std::filesystem::path& path)
         {
             return ar.load(*this, path);
         }
@@ -202,3 +302,4 @@ namespace tct::properties
         std::map<std::string, property_base*> m_properties;
     };
 }
+

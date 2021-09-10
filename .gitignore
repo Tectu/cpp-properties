@@ -1,5 +1,6 @@
 cppcheck*.xml
 .build/
+doc/doxygen/
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/clion+all

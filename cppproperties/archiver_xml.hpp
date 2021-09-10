@@ -13,6 +13,11 @@ namespace tct::properties
 
     class properties;
 
+	/**
+	 * Built-in archiver for (de)serialization to/from XML.
+	 *
+	 * @details This implementation uses the tinyxml2 library.
+	 */
     class archiver_xml :
         public archiver
     {
@@ -26,3 +31,4 @@ namespace tct::properties
     };
 
 }
+

@@ -20,7 +20,7 @@ if (CPPPROPERTIES_ENABLE_QT_WIDGETS)
 endif()
 
 # Boost
-if (CPPPROPERTIESENABLE_BOOST)
+if (CPPPROPERTIES_ENABLE_BOOST)
     find_package(
         Boost
         REQUIRED

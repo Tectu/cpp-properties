@@ -32,7 +32,7 @@ if (CPPPROPERTIES_ENABLE_GPDS)
     FetchContent_Declare(
         gpds
         GIT_REPOSITORY https://github.com/simulton/gpds
-        GIT_TAG        1.0.2
+        GIT_TAG        1.5.0
     )
     FetchContent_GetProperties(gpds)
     if(NOT gpds_POPULATED)

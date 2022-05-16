@@ -79,14 +79,16 @@ void archiver_gpds::read_recursively(const gpds::container& root, ::tct::propert
                 throw std::runtime_error("Could not retrieve nested property \"" + key + "\".");
 
             // Get the nested GPDS container
-            const gpds::container* cc = v.get<gpds::container*>();
-            assert(cc);
-            read_recursively(*cc, *nested);
+            if (const auto& cc = v.get<gpds::container*>(); cc)
+                read_recursively(**cc, *nested);
         }
 
         // Not nested
         else {
-            value->from_string(v.to_string());
+            if (!v.is_type<std::string>())
+                continue;
+
+            value->from_string(v.get<std::string>().value());
 
             // Attributes
             for (const auto& [attr_key, attr_value] : v.attributes.map)

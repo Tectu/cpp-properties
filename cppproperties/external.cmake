@@ -6,7 +6,7 @@ if (CPPPROPERTIES_ENABLE_QT)
         Qt5
         REQUIRED
         COMPONENTS
-            core
+            Core
     )
 endif()
 if (CPPPROPERTIES_ENABLE_QT_WIDGETS)
@@ -14,8 +14,8 @@ if (CPPPROPERTIES_ENABLE_QT_WIDGETS)
         Qt5
         REQUIRED
         COMPONENTS
-            gui
-            widgets
+            Gui
+            Widgets
     )
 endif()
 

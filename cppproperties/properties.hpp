@@ -141,7 +141,7 @@ namespace tct::properties
             if (m_properties.contains(name))
                 throw property_exists(name);
 
-            if (not ptr)
+            if (!ptr)
                 throw std::logic_error("ptr must not be null.");
 
             auto p = new property_link<T>;
@@ -163,10 +163,10 @@ namespace tct::properties
             if (m_properties.contains(name))
                 throw property_exists(name);
 
-            if (not setter)
+            if (!setter)
                 throw std::logic_error("setter must not be null.");
 
-            if (not getter)
+            if (!getter)
                 throw std::logic_error("setter must not be null.");
 
             auto p = new property_link_functions<T>(setter, getter);
@@ -196,7 +196,7 @@ namespace tct::properties
         void
 		set_property(const std::string& name, const T& t)
         {
-            if (not m_properties.contains(name))
+            if (!m_properties.contains(name))
                 throw property_nonexist(name);
 
             property_cast<T>(m_properties[name]) = t;

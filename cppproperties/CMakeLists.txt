@@ -18,8 +18,9 @@ set(HEADERS_PUBLIC
     property.hpp
     property_ex.hpp
     property_ex_cpp.hpp
+    property_ex_cpp_modern.hpp
     $<$<BOOL:${CPPPROPERTIES_ENABLE_BOOST}>:${CMAKE_CURRENT_LIST_DIR}/property_ex_boost.hpp>
-    $<$<BOOL:${CPPPROPERTIES_ENABLE_QT}>:${CMAKE_CURRENT_LIST_DIR}/property_ex_cpp_modern.hpp>
+    $<$<BOOL:${CPPPROPERTIES_ENABLE_QT}>:${CMAKE_CURRENT_LIST_DIR}/property_ex_qt.hpp>
 )
 
 set(HEADERS_QT_WIDGETS_PUBLIC

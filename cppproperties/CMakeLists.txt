@@ -73,7 +73,7 @@ function(setup_target_common target)
         PUBLIC
             $<$<BOOL:${CPPPROPERTIES_ENABLE_BOOST}>:Boost::headers>
             $<$<BOOL:${CPPPROPERTIES_ENABLE_QT}>:Qt5::Core>
-            $<$<BOOL:${CPPPROPERTIES_ENABLE_GPDS}>:gpds-static>
+            $<$<BOOL:${CPPPROPERTIES_ENABLE_GPDS}>:gpds::gpds-shared>
             $<$<BOOL:${CPPPROPERTIES_ENABLE_QT_WIDGETS}>:Qt5::Gui>
             $<$<BOOL:${CPPPROPERTIES_ENABLE_QT_WIDGETS}>:Qt5::Widgets>
     )

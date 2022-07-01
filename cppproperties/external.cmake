@@ -29,16 +29,8 @@ endif()
 
 # GPDS
 if (CPPPROPERTIES_ENABLE_GPDS)
-    FetchContent_Declare(
+    find_package(
         gpds
-        GIT_REPOSITORY https://github.com/simulton/gpds
-        GIT_TAG        1.5.0
+        REQUIRED
     )
-    FetchContent_GetProperties(gpds)
-    if(NOT gpds_POPULATED)
-        FetchContent_Populate(gpds)
-        set(GPDS_BUILD_TESTS OFF CACHE INTERNAL "")
-        set(GPDS_BUILD_EXAMPLES OFF CACHE INTERNAL "")
-        add_subdirectory(${gpds_SOURCE_DIR} ${gpds_BINARY_DIR})
-    endif()
 endif()

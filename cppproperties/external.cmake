@@ -34,3 +34,11 @@ if (CPPPROPERTIES_ENABLE_GPDS)
         REQUIRED
     )
 endif()
+
+# JSON
+if (CPPPROPERTIES_ENABLE_JSON)
+    find_package(
+        nlohmann_json
+        REQUIRED
+    )
+endif()

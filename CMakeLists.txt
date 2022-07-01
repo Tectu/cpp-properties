@@ -4,7 +4,7 @@ project(
     cppproperties
     VERSION 0.1.0
     LANGUAGES CXX
-    HOMEPAGE_URL "https://github.com/text/cppproperties"
+    HOMEPAGE_URL "https://github.com/tectu/cppproperties"
 )
 
 # User options

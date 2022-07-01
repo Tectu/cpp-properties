@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+    branches: [master]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        toolchain:
+          [
+            {
+              name: "Ubuntu GCC 11",
+              cxx: "g++-11",
+              cc: "gcc-11",
+              packages: "gcc-11",
+              os: ubuntu-latest,
+            },
+            {
+              name: "Ubuntu GCC 12",
+              cxx: "g++-12",
+              cc: "gcc-12",
+              packages: "gcc-12",
+              os: ubuntu-latest,
+            },
+          ]
+
+    continue-on-error: false
+    runs-on: ${{ matrix.toolchain.os }}
+    env:
+      CC: ${{ matrix.toolchain.cc }}
+      CXX: ${{ matrix.toolchain.cxx }}
+
+    name: "${{ matrix.toolchain.name }} (spdlog: ${{ matrix.feature_spdlog}})"
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Ninja
+        uses: seanmiddleditch/gha-setup-ninja@master
+
+      - name: Install packages (via apt)
+        if: runner.os == 'Linux'
+        run: sudo apt install ${{ matrix.toolchain.packages }} -y
+
+      - name: Configure
+        run: cmake -Bbuild -GNinja -DCPPPROPERTIES_BUILD_EXAMPLES=ON
+
+      - name: Build
+        run: cmake --build build
+
+      - name: Run tests
+        run: ./build/test/tests

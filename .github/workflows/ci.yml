@@ -43,7 +43,7 @@ jobs:
         run: sudo apt install ${{ matrix.toolchain.packages }} -y
 
       - name: Configure
-        run: cmake -Bbuild -GNinja -DCPPPROPERTIES_BUILD_EXAMPLES=ON
+        run: cmake -Bbuild -GNinja -DCPPPROPERTIES_BUILD_EXAMPLES=ON -DCPPPROPERTIES_BUILD_TESTS=ON
 
       - name: Build
         run: cmake --build build

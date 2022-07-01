@@ -3,7 +3,6 @@ include(external.cmake)
 
 # Variables for convenience
 set(NAME          cppproperties)
-set(TARGET_OBJ    ${NAME}-objs)
 set(TARGET_SHARED ${NAME}-shared)
 set(TARGET_STATIC ${NAME}-static)
 
@@ -94,28 +93,7 @@ function(setup_target_common target)
                 AUTOMOC ON
         )
     endif()
-
-    include(GenerateExportHeader)
-    generate_export_header(
-        ${target}
-        BASE_NAME ${NAME}
-        EXPORT_FILE_NAME ${NAME}_export.hpp
-        DEPRECATED_MACRO_NAME "CPPPROPERTIES_DEPRECATED"
-        NO_DEPRECATED_MACRO_NAME "CPPPROPERTIES_NO_DEPRECATED"
-        EXPORT_MACRO_NAME "CPPPROPERTIES_EXPORT"
-        NO_EXPORT_MACRO_NAME "CPPPROPERTIES_NO_EXPORT"
-        STATIC_DEFINE "CPPPROPERTIES_STATIC_DEFINE"
-        DEFINE_NO_DEPRECATED
-    )
 endfunction()
-
-
-################################################################################
-# Object library                                                               #
-################################################################################
-
-add_library(${TARGET_OBJ} OBJECT)
-setup_target_common(${TARGET_OBJ})
 
 
 ################################################################################
@@ -149,16 +127,9 @@ install(
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${NAME}
 )
 
-# Install export header
-install(
-    FILES ${CMAKE_CURRENT_BINARY_DIR}/${NAME}_export.hpp
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${NAME}
-)
-
 # Targets
 install(
     TARGETS
-        ${TARGET_OBJ}
         ${TARGET_SHARED}
         ${TARGET_STATIC}
     EXPORT ${NAME}-targets

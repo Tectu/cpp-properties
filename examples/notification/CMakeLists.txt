@@ -17,5 +17,5 @@ target_include_directories(
 target_link_libraries(
     ${TARGET}
     PRIVATE
-        cppproperties-objs
+        cppproperties-static
 )

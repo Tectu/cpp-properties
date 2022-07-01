@@ -20,7 +20,7 @@ target_sources(
 
 target_link_libraries(
     ${TARGET}
-        cppproperties-objs
+        cppproperties-static
 )
 
 

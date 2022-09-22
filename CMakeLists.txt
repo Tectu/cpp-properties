@@ -28,6 +28,7 @@ add_subdirectory(cppproperties)
 
 # Add tests
 if (CPPPROPERTIES_BUILD_TESTS)
+    enable_testing()
     add_subdirectory(test)
 endif()
 

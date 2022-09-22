@@ -247,7 +247,7 @@ namespace tct::properties
 		/**
 		 * Get the value.
 		 */
-        explicit operator T() const
+        explicit operator T() const noexcept
         {
             return data;
         }

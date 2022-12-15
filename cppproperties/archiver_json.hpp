@@ -24,8 +24,13 @@ namespace tct::properties
 		load(properties& p, const std::string& str) const override;
 
     private:
-        static void write_recursively();
-        static void read_recursively();
+        static
+        void
+        write_recursively();
+
+        static
+        void
+        read_recursively();
     };
 
 }

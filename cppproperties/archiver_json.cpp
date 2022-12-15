@@ -5,7 +5,8 @@
 
 using namespace tct::properties;
 
-std::string archiver_json::save(const properties& p) const
+std::string
+archiver_json::save(const properties& p) const
 {
     nlohmann::json json;
 
@@ -16,7 +17,8 @@ std::string archiver_json::save(const properties& p) const
     return json.dump(4);
 }
 
-std::pair<bool, std::string> archiver_json::load(properties& p, const std::string& str) const
+std::pair<bool, std::string>
+archiver_json::load(properties& p, const std::string& str) const
 {
     nlohmann::json json(str);
 

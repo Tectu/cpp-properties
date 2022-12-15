@@ -5,7 +5,8 @@
 
 using namespace tct::properties;
 
-gpds::container archiver_gpds::save(const properties& p) const
+gpds::container
+archiver_gpds::save(const properties& p) const
 {
     // Create container
     gpds::container c;
@@ -16,18 +17,20 @@ gpds::container archiver_gpds::save(const properties& p) const
     return c;
 }
 
-std::pair<bool, std::string> archiver_gpds::load(properties& p, const gpds::container& c) const
+std::pair<bool, std::string>
+archiver_gpds::load(properties& p, const gpds::container& c) const
 {
     read_recursively(c, p);
 
     return { true, "success." };
 }
 
-void archiver_gpds::write_recursively(gpds::container& root, const ::tct::properties::properties& p)
+void
+archiver_gpds::write_recursively(gpds::container& root, const ::tct::properties::properties& p)
 {
     // Values
     for (const auto& [key, value] : p) {
-        assert(not key.empty());
+        assert(!key.empty());
         assert(value);
 
         // Check if nested
@@ -61,7 +64,8 @@ void archiver_gpds::write_recursively(gpds::container& root, const ::tct::proper
         root.add_attribute(attr_key.c_str(), attr_value);
 }
 
-void archiver_gpds::read_recursively(const gpds::container& root, ::tct::properties::properties& p)
+void
+archiver_gpds::read_recursively(const gpds::container& root, ::tct::properties::properties& p)
 {
     // Iterate properties
     for (auto& [key, value] : p) {
@@ -75,7 +79,7 @@ void archiver_gpds::read_recursively(const gpds::container& root, ::tct::propert
         if (v.is_type<gpds::container*>()) {
             // Find the nested properties
             properties* nested = p.get_nested_properties(key);
-            if (not nested)
+            if (!nested)
                 throw std::runtime_error("Could not retrieve nested property \"" + key + "\".");
 
             // Get the nested GPDS container

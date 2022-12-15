@@ -7,7 +7,8 @@
 
 using namespace tct::properties;
 
-std::string archiver_xml::save(const properties& p) const
+std::string
+archiver_xml::save(const properties& p) const
 {
     // Create document
     tinyxml2::XMLDocument doc;
@@ -30,7 +31,8 @@ std::string archiver_xml::save(const properties& p) const
     return str;
 }
 
-std::pair<bool, std::string> archiver_xml::load(properties& p, const std::string& str) const
+std::pair<bool, std::string>
+archiver_xml::load(properties& p, const std::string& str) const
 {
     // Create document
     tinyxml2::XMLDocument doc;
@@ -38,7 +40,7 @@ std::pair<bool, std::string> archiver_xml::load(properties& p, const std::string
 
     // Retrieve the root node
     tinyxml2::XMLElement* root = doc.FirstChildElement("properties");
-    if (not root)
+    if (!root)
         return { false, "Could not find root node \"properties\"" };
 
     // Iterate properties
@@ -47,10 +49,11 @@ std::pair<bool, std::string> archiver_xml::load(properties& p, const std::string
     return { true, "" };
 }
 
-void archiver_xml::write_recursively(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const ::tct::properties::properties& p)
+void
+archiver_xml::write_recursively(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const ::tct::properties::properties& p)
 {
     for (const auto& [key, value] : p) {
-        assert(not key.empty());
+        assert(!key.empty());
         assert(value);
 
         // Attributes
@@ -59,7 +62,7 @@ void archiver_xml::write_recursively(tinyxml2::XMLDocument& doc, tinyxml2::XMLEl
 
         // Create new element
         tinyxml2::XMLElement* element = doc.NewElement(key.c_str());
-        if (not element)
+        if (!element)
             throw std::runtime_error("Could not create new tinyxml::XMLElement object");
 
         // Check if nested
@@ -84,7 +87,8 @@ void archiver_xml::write_recursively(tinyxml2::XMLDocument& doc, tinyxml2::XMLEl
     }
 }
 
-void archiver_xml::read_recursively(tinyxml2::XMLElement& root, ::tct::properties::properties& p)
+void
+archiver_xml::read_recursively(tinyxml2::XMLElement& root, ::tct::properties::properties& p)
 {
     // Attributes
     for (const tinyxml2::XMLAttribute* attribute = root.FirstAttribute(); attribute; attribute = attribute->Next())
@@ -93,14 +97,14 @@ void archiver_xml::read_recursively(tinyxml2::XMLElement& root, ::tct::propertie
     // Iterate properties
     for (auto& [key, value] : p) {
         tinyxml2::XMLElement* element = root.FirstChildElement(key.c_str());
-        if (not element)
+        if (!element)
             continue;
 
         // Check if nested
-        if (not element->GetText()) {
+        if (!element->GetText()) {
             // Find the nested properties
             properties* nested = p.get_nested_properties(key);
-            if (not nested)
+            if (!nested)
                 throw std::runtime_error("Could not retrieve nested property \"" + key + "\".");
 
             read_recursively(*element, *nested);

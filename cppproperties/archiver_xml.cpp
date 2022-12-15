@@ -67,9 +67,8 @@ archiver_xml::write_recursively(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement
 
         // Check if nested
         const properties* nested = dynamic_cast<properties*>(value);
-        if (nested) {
+        if (nested)
             write_recursively(doc, *element, *nested);
-        }
 
         // Not nested
         else {

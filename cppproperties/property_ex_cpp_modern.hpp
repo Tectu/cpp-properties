@@ -10,6 +10,6 @@
 REGISTER_PROPERTY
 (
     std::filesystem::path,
-    [this](){ return this->data.string(); },
+    [this]{ return this->data.string(); },
     [this](const std::string& str) { *this = str; }
 )

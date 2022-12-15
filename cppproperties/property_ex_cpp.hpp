@@ -23,25 +23,24 @@ struct tct::properties::property<std::basic_string<T>> :
 
 REGISTER_PROPERTY(
     bool,
-    [this](){ return (this->data ? "true" : "false"); },
+    [this]{ return (this->data ? "true" : "false"); },
     [this](const std::string& str){ this-> data = (str == "true" || str == "True"); }
 )
 
 REGISTER_PROPERTY(
     int,
-    [this](){ return std::to_string(this->data); },
+    [this]{ return std::to_string(this->data); },
     [this](const std::string& str){ this->data = std::stoi(str); }
 )
 
 REGISTER_PROPERTY(
     float,
-    [this](){ return std::to_string(this->data); },
+    [this]{ return std::to_string(this->data); },
     [this](const std::string& str){ this->data = std::stof(str); }
 )
 
 REGISTER_PROPERTY(
     double,
-    [this](){ return std::to_string(this->data); },
+    [this]{ return std::to_string(this->data); },
     [this](const std::string& str){ this->data = std::stod(str); }
 )
-

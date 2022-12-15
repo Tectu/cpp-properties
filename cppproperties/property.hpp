@@ -48,7 +48,8 @@ namespace tct::properties
 		/**
 		 * Destructor.
 		 */
-        virtual ~property_base() = default;
+        virtual
+        ~property_base() = default;
 
 		/**
 		 * Copy-assignment operator.
@@ -56,7 +57,8 @@ namespace tct::properties
 		 * @param rhs The right hand side object to copy-assign from.
 		 * @return Reference to the left hand side object.
 		 */
-        property_base& operator=(const property_base& rhs) = default;
+        property_base&
+        operator=(const property_base& rhs) = default;
 
 		/**
 		 * Move-assignment operator.
@@ -64,17 +66,20 @@ namespace tct::properties
 		 * @param rhs The right hand side object to move-assign from.
 		 * @return Reference to the left hand side object.
 		 */
-        property_base& operator=(property_base&& rhs) noexcept = default;
+        property_base&
+        operator=(property_base&& rhs) noexcept = default;
 
 		/**
 		 * Function object to serialize property to string.
 		 */
-        std::function<std::string()> to_string;
+        std::function<std::string()>
+        to_string;
 
 		/**
 		 * Function object to deserialize property from string.
 		 */
-        std::function<void(std::string)> from_string;
+        std::function<void(std::string)>
+        from_string;
 
 		/**
 		 * Set an attribute value.
@@ -172,14 +177,15 @@ namespace tct::properties
         }
 
 		/**
-		 * @brief Copy assig the value.
+		 * @brief Copy assign the value.
 		 *
 		 * @note This is only available if @p T is copy assignable.
 		 *
 		 * @param t The value to copy-assign.
 		 * @return Reference to this property.
 		 */
-        property_impl<T>& operator=(const T& t)
+        property_impl<T>&
+        operator=(const T& t)
         requires std::is_copy_assignable_v<T>
         {
             this->data = t;
@@ -195,7 +201,8 @@ namespace tct::properties
 		 * @param t The value to move-assign.
 		 * @return Reference to this property.
 		 */
-        property_impl<T>& operator=(T&& t) noexcept
+        property_impl<T>&
+        operator=(T&& t) noexcept
         requires std::is_move_assignable_v<T>
         {
             this->data = std::move(t);
@@ -211,7 +218,8 @@ namespace tct::properties
 		 * @param rhs The right hand side property to copy-assign from.
 		 * @return Reference to the left hand side property.
 		 */
-        property_impl<T>& operator=(const property_impl<T>& rhs)
+        property_impl<T>&
+        operator=(const property_impl<T>& rhs)
         requires std::is_copy_assignable_v<T>
         {
             data = rhs.data;
@@ -226,7 +234,8 @@ namespace tct::properties
 		 * @param rhs The right hand side property to move-assign from.
 		 * @return Reference to the left hand side property.
 		 */
-        property_impl<T>& operator=(property_impl<T>&& rhs) noexcept
+        property_impl<T>&
+        operator=(property_impl<T>&& rhs) noexcept
         requires std::is_move_assignable_v<T>
         {
             data = std::move(rhs.data);
@@ -239,7 +248,8 @@ namespace tct::properties
 		 * @param t The value to compare with.
 		 * @return @p true if the values are equal, @p false otherwise.
 		 */
-        bool operator==(const T& t) const
+        bool
+        operator==(const T& t) const
         {
             return this->data == t;
         }
@@ -247,7 +257,9 @@ namespace tct::properties
 		/**
 		 * Get the value.
 		 */
-        explicit operator T() const noexcept
+        explicit
+        operator T()
+        const noexcept
         {
             return data;
         }
@@ -259,7 +271,8 @@ namespace tct::properties
 		 *
 		 * @param cb The callback to register.
 		 */
-        void register_observer(const callback& cb)
+        void
+        register_observer(const callback& cb)
         {
             m_observers.push_back(cb);
         }
@@ -270,7 +283,8 @@ namespace tct::properties
 		 *
 		 * @brief Notify all registered observers by invoking their callback.
 		 */
-        void notify()
+        void
+        notify()
         {
             std::for_each(std::begin(m_observers), std::end(m_observers), [](const callback& cb){
                 std::invoke(cb);
@@ -308,14 +322,17 @@ namespace tct::properties
         }
 
     private:
-        [[nodiscard]] std::string to_string() const
+        [[nodiscard]]
+        std::string
+        to_string() const
         {
             property<T> p;
             p.data = *data;
             return p.to_string();
         }
 
-        void from_string(const std::string& str)
+        void
+        from_string(const std::string& str)
         {
             property<T> p;
             p.from_string(str);
@@ -339,14 +356,17 @@ namespace tct::properties
         setter<T> m_setter;
         getter<T> m_getter;
 
-        [[nodiscard]] std::string to_string() const
+        [[nodiscard]]
+        std::string
+        to_string() const
         {
             property<T> p;
             p.data = m_getter();
             return p.to_string();
         }
 
-        void from_string(const std::string& str)
+        void
+        from_string(const std::string& str)
         {
             property<T> p;
             p.from_string(str);
@@ -355,18 +375,23 @@ namespace tct::properties
     };
 
     template<typename T>
-    constexpr T& property_cast(property_base* pb)
+    constexpr
+    T&
+    property_cast(property_base* pb)
     {
         return dynamic_cast<property<T>*>(pb)->data;
     }
 
     template<typename T>
-    constexpr const T& property_cast(const property_base* pb)
+    constexpr
+    const T&
+    property_cast(const property_base* pb)
     {
         return dynamic_cast<const property<T>*>(pb)->data;
     }
 
     template<typename T>
-    std::ostream& operator<<(std::ostream& os, const property<T>& p) { os << p.to_string(); return os; }
+    std::ostream&
+    operator<<(std::ostream& os, const property<T>& p) { os << p.to_string(); return os; }
 
 }

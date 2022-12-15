@@ -98,7 +98,8 @@ namespace tct::properties
          * @return A reference to the newly created property.
          */
         template<typename T>
-        property<T>& make_property(const std::string& name)
+        property<T>&
+        make_property(const std::string& name)
         {
             if (m_properties.contains(name))
                 throw property_exists(name);
@@ -117,7 +118,8 @@ namespace tct::properties
          */
         template<typename T>
         requires std::derived_from<T, properties>
-        T& make_nested_property(const std::string& name)
+        T&
+        make_nested_property(const std::string& name)
         {
             if (m_properties.contains(name))
                 throw property_exists(name);
@@ -136,7 +138,8 @@ namespace tct::properties
 		 * @return A reference to the newly created property.
 		 */
         template<typename T>
-        void make_linked_property(const std::string& name, T* ptr)
+        void
+        make_linked_property(const std::string& name, T* ptr)
         {
             if (m_properties.contains(name))
                 throw property_exists(name);
@@ -158,7 +161,8 @@ namespace tct::properties
 		 * @param getter The getter function.
 		 */
         template<typename T>
-        void make_linked_property_functions(const std::string& name, const setter<T>& setter, const getter<T>& getter)
+        void
+        make_linked_property_functions(const std::string& name, const setter<T>& setter, const getter<T>& getter)
         {
             if (m_properties.contains(name))
                 throw property_exists(name);
@@ -302,4 +306,3 @@ namespace tct::properties
         std::map<std::string, property_base*> m_properties;
     };
 }
-

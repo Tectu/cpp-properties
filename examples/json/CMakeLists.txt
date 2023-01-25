@@ -1,4 +1,6 @@
-set(TARGET example-nested)
+include(../../cppproperties/external.cmake)
+
+set(TARGET example-json)
 
 add_executable(${TARGET})
 

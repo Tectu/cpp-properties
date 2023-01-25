@@ -34,3 +34,35 @@ namespace tct::properties
     };
 
 }
+
+
+#include <nlohmann/json.hpp>
+
+#include "properties.hpp"
+
+namespace tct::properties
+{
+
+    inline
+    std::string
+    archiver_json::save(const properties& p) const
+    {
+        nlohmann::json json;
+
+        for (const auto& [key, value] : p) {
+            json[key] = value->to_string();
+        }
+
+        return json.dump(4);
+    }
+
+    inline
+    std::pair<bool, std::string>
+    archiver_json::load(properties& p, const std::string& str) const
+    {
+        nlohmann::json json(str);
+
+        return { true, "success" };
+    }
+
+}

@@ -15,7 +15,16 @@ namespace tct::properties::qt_widgets
         Q_DISABLE_COPY_MOVE(integer)
 
     public:
-        integer(tct::properties::property<type>& p);
+        integer(tct::properties::property<type>& p) :
+            widget_base(p)
+        {
+            setValue(p.data);
+
+            connect(this, qOverload<int>(&QSpinBox::valueChanged), [this](const int value){
+                m_property = value;
+            });
+        }
+
         ~integer() = default;
     };
 

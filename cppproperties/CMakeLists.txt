@@ -70,6 +70,8 @@ function(setup_target_common target)
             $<$<BOOL:${CPPPROPERTIES_ENABLE_BOOST}>:Boost::headers>
             $<$<BOOL:${CPPPROPERTIES_ENABLE_QT}>:Qt5::Core>
             $<$<BOOL:${CPPPROPERTIES_ENABLE_GPDS}>:gpds::gpds-shared>
+            $<$<BOOL:${CPPPROPERTIES_ENABLE_JSON}>:nlohmann_json::nlohmann_json>
+            $<$<BOOL:${CPPPROPERTIES_ENABLE_XML}>:tinyxml2::tinyxml2>
             $<$<BOOL:${CPPPROPERTIES_ENABLE_QT_WIDGETS}>:Qt5::Gui>
             $<$<BOOL:${CPPPROPERTIES_ENABLE_QT_WIDGETS}>:Qt5::Widgets>
     )

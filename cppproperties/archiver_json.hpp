@@ -36,7 +36,7 @@ namespace tct::properties
 }
 
 
-#include "3rdparty/nlohmann_json/json.hpp"
+#include <nlohmann/json.hpp>
 
 #include "properties.hpp"
 

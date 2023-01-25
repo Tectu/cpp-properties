@@ -42,3 +42,11 @@ if (CPPPROPERTIES_ENABLE_JSON)
         REQUIRED
     )
 endif()
+
+# XML
+if (CPPPROPERTIES_ENABLE_XML)
+    find_package(
+        tinyxml2
+        REQUIRED
+    )
+endif()

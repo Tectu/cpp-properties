@@ -41,9 +41,9 @@ namespace tct::properties
 
 }
 
-#include <fstream>
+#include <tinyxml2.h>
 
-#include "3rdparty/tinyxml2/tinyxml2.h"
+#include <fstream>
 
 #include "properties.hpp"
 

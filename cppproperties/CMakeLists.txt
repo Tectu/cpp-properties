@@ -59,7 +59,6 @@ function(setup_target_common target)
         PRIVATE
             dummy.cpp
             ${HEADERS_PUBLIC}
-            $<$<BOOL:${CPPPROPERTIES_ENABLE_XML}>:3rdparty/tinyxml2/tinyxml2.cpp>
             $<$<BOOL:${CPPPROPERTIES_ENABLE_QT_WIDGETS}>:${HEADERS_QT_WIDGETS_PUBLIC}>
             $<$<BOOL:${CPPPROPERTIES_ENABLE_QT_WIDGETS}>:${SOURCES_QT_WIDGETS_PRIVATE}>
     )

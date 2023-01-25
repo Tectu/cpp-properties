@@ -30,11 +30,6 @@ set(HEADERS_QT_WIDGETS_PUBLIC
     qt_widgets/nested.hpp
 )
 
-set(SOURCES_QT_WIDGETS_PRIVATE
-    qt_widgets/boolean.cpp
-    qt_widgets/integer.cpp
-)
-
 # This function sets stuff up common to all targets
 function(setup_target_common target)
     target_compile_features(
@@ -60,7 +55,6 @@ function(setup_target_common target)
             dummy.cpp
             ${HEADERS_PUBLIC}
             $<$<BOOL:${CPPPROPERTIES_ENABLE_QT_WIDGETS}>:${HEADERS_QT_WIDGETS_PUBLIC}>
-            $<$<BOOL:${CPPPROPERTIES_ENABLE_QT_WIDGETS}>:${SOURCES_QT_WIDGETS_PRIVATE}>
     )
 
     target_link_libraries(

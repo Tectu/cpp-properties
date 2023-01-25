@@ -59,10 +59,7 @@ function(setup_target_common target)
         PRIVATE
             dummy.cpp
             ${HEADERS_PUBLIC}
-            $<$<BOOL:${CPPPROPERTIES_ENABLE_JSON}>:archiver_json.cpp>
-            $<$<BOOL:${CPPPROPERTIES_ENABLE_XML}>:archiver_xml.cpp>
             $<$<BOOL:${CPPPROPERTIES_ENABLE_XML}>:3rdparty/tinyxml2/tinyxml2.cpp>
-            $<$<BOOL:${CPPPROPERTIES_ENABLE_GPDS}>:archiver_gpds.cpp>
             $<$<BOOL:${CPPPROPERTIES_ENABLE_QT_WIDGETS}>:${HEADERS_QT_WIDGETS_PUBLIC}>
             $<$<BOOL:${CPPPROPERTIES_ENABLE_QT_WIDGETS}>:${SOURCES_QT_WIDGETS_PRIVATE}>
     )

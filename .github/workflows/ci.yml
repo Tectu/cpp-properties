@@ -16,10 +16,18 @@ jobs:
         toolchain:
           [
             {
-              name: "Ubuntu GCC 11",
-              cxx: "g++-11",
-              cc: "gcc-11",
-              packages: "gcc-11 g++-11 nlohmann-json3-dev libtinyxml2-9",
+              name: "Ubuntu GCC",
+              cxx: "g++",
+              cc: "gcc",
+              packages: "nlohmann-json3-dev libtinyxml2-dev",
+              os: ubuntu-latest,
+            },
+            ,
+            {
+              name: "Ubuntu Clang",
+              cxx: "clang++",
+              cc: "clang",
+              packages: "nlohmann-json3-dev libtinyxml2-dev",
               os: ubuntu-latest,
             }
           ]

@@ -11,11 +11,14 @@ namespace tct::properties::qt_widgets
         using type = T;
 
     public:
+        explicit
         widget_base(property<T>& property) :
             m_property(property)
         {
-
         }
+
+        virtual
+        ~widget_base() = default;
 
     protected:
         property<T>& m_property;

@@ -15,6 +15,7 @@ namespace tct::properties::qt_widgets
         Q_DISABLE_COPY_MOVE(boolean)
 
     public:
+        explicit
         boolean(tct::properties::property<type>& p) :
             widget_base(p)
         {
@@ -25,7 +26,7 @@ namespace tct::properties::qt_widgets
             });
         }
 
-        ~boolean() = default;
+        ~boolean() override = default;
     };
 
 }

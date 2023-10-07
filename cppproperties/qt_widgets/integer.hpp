@@ -15,6 +15,7 @@ namespace tct::properties::qt_widgets
         Q_DISABLE_COPY_MOVE(integer)
 
     public:
+        explicit
         integer(tct::properties::property<type>& p) :
             widget_base(p)
         {
@@ -25,7 +26,7 @@ namespace tct::properties::qt_widgets
             });
         }
 
-        ~integer() = default;
+        ~integer() override = default;
     };
 
 }

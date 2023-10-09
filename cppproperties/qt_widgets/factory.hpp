@@ -27,7 +27,8 @@ namespace tct::properties::qt_widgets
         template<typename T_raw, typename T_editor>
         [[nodiscard]]
         static
-        std::unique_ptr<QWidget> build_widget(property_base* pb)
+        std::unique_ptr<QWidget>
+        build_widget(property_base* pb)
         {
             // Make sure the editor can handle this type
             static_assert(std::is_same_v<T_raw, typename T_editor::type>);

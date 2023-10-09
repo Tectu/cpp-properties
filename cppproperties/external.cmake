@@ -1,9 +1,9 @@
 include(FetchContent)
 
-# Qt5
+# Qt
 if (CPPPROPERTIES_ENABLE_QT)
     find_package(
-        Qt5
+        Qt6
         REQUIRED
         COMPONENTS
             Core
@@ -11,7 +11,7 @@ if (CPPPROPERTIES_ENABLE_QT)
 endif()
 if (CPPPROPERTIES_ENABLE_QT_WIDGETS)
     find_package(
-        Qt5
+        Qt6
         REQUIRED
         COMPONENTS
             Gui

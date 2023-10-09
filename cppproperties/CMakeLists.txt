@@ -21,11 +21,11 @@ set(HEADERS_PUBLIC
 )
 
 set(HEADERS_QT_WIDGETS_PUBLIC
-    qt_widgets/factory.hpp
-    qt_widgets/widget_base.hpp
-    qt_widgets/boolean.hpp
-    qt_widgets/integer.hpp
-    qt_widgets/nested.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/qt_widgets/factory.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/qt_widgets/widget_base.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/qt_widgets/boolean.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/qt_widgets/integer.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/qt_widgets/nested.hpp
 )
 
 add_library(${TARGET} INTERFACE IMPORTED GLOBAL)
@@ -57,12 +57,12 @@ target_link_libraries(
     ${TARGET}
     INTERFACE
         $<$<BOOL:${CPPPROPERTIES_ENABLE_BOOST}>:Boost::headers>
-        $<$<BOOL:${CPPPROPERTIES_ENABLE_QT}>:Qt5::Core>
+        $<$<BOOL:${CPPPROPERTIES_ENABLE_QT}>:Qt::Core>
         $<$<BOOL:${CPPPROPERTIES_ENABLE_GPDS}>:gpds::gpds-shared>
         $<$<BOOL:${CPPPROPERTIES_ENABLE_JSON}>:nlohmann_json::nlohmann_json>
         $<$<BOOL:${CPPPROPERTIES_ENABLE_XML}>:tinyxml2::tinyxml2>
-        $<$<BOOL:${CPPPROPERTIES_ENABLE_QT_WIDGETS}>:Qt5::Gui>
-        $<$<BOOL:${CPPPROPERTIES_ENABLE_QT_WIDGETS}>:Qt5::Widgets>
+        $<$<BOOL:${CPPPROPERTIES_ENABLE_QT_WIDGETS}>:Qt::Gui>
+        $<$<BOOL:${CPPPROPERTIES_ENABLE_QT_WIDGETS}>:Qt::Widgets>
 )
 
 if (CPPPROPERTIES_ENABLE_QT_WIDGETS)

@@ -49,4 +49,3 @@ namespace tct::properties
         std::string property_name;
     };
 }
-

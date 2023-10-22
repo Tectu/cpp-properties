@@ -8,4 +8,3 @@
 namespace tct::cppproperties
 {
 }
-

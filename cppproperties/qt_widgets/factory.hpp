@@ -66,7 +66,8 @@ namespace tct::properties::qt_widgets
 
         [[nodiscard]]
         static
-        std::unique_ptr<QWidget> build_form(tct::properties::properties& p)
+        std::unique_ptr<QWidget>
+        build_form(tct::properties::properties& p)
         {
             // Layout
             QFormLayout* layout = new QFormLayout;

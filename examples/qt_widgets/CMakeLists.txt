@@ -19,3 +19,11 @@ target_link_libraries(
     PRIVATE
         cppproperties
 )
+
+# Note: This is also set in the cppproperties library target. However, that does not seem to pass to the
+#       consuming target. Figure out why not.
+set_target_properties(
+    ${TARGET}
+    PROPERTIES
+        AUTOMOC ON
+)

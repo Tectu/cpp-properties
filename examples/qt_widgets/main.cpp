@@ -6,12 +6,34 @@
 #include "cppproperties/properties.hpp"
 #include "cppproperties/qt_widgets/factory.hpp"
 
+struct color :
+    tct::properties::properties
+{
+    MAKE_PROPERTY(red, int);
+    MAKE_PROPERTY(green, int);
+    MAKE_PROPERTY(blue, int);
+
+    void set(const std::string& rgb_string)
+    {
+        if (rgb_string.size() != 6)
+            throw std::runtime_error(R"(RGB string is malformed. Needs to be of format "rrggbb" in hex format.)");
+
+        int hex = std::stoi(rgb_string, nullptr, 16);
+        this->red   = (hex / 0x10000);
+        this->green = (hex / 0x100) % 0x100;
+        this->blue  = (hex % 0x100);
+    }
+};
+
+
 struct shape :
     tct::properties::properties
 {
     MAKE_PROPERTY(enabled, bool);
     MAKE_PROPERTY(x, int);
     MAKE_PROPERTY(y, int);
+    MAKE_NESTED_PROPERTY(fg_color, color);
+    MAKE_NESTED_PROPERTY(bg_color, color);
 
     shape()
     {

@@ -7,7 +7,6 @@
 #include <sstream>
 #include <type_traits>
 
-#include "archiver.hpp"
 #include "exceptions.hpp"
 
 #define MAKE_PROPERTY(name, type) \
@@ -247,59 +246,6 @@ namespace tct::properties
                 throw property_nonexist(name);
 
             return dynamic_cast<properties*>(it->second);
-        }
-
-		/**
-		 * Serialize properties to string.
-		 *
-		 * @param ar The archiver to use.
-		 * @return The serialized string.
-		 */
-        [[nodiscard]]
-		std::string
-		save(const archiver& ar) const
-        {
-            return ar.save(*this);
-        }
-
-		/**
-		 * Serialize properties to file.
-		 *
-		 * @param ar The archiver to use.
-		 * @param path The file path.
-		 * @return @p true if successful, @p false otherwise with optional error message.
-		 */
-        [[nodiscard("file i/o might fail")]]
-		std::pair<bool, std::string>
-		save(const archiver& ar, const std::filesystem::path& path)
-        {
-            return ar.save(*this, path);
-        }
-
-		/**
-		 * Deserialize properties from string.
-		 *
-		 * @param ar The archiver to use.
-		 * @param str The string to deserialize.
-		 */
-        void
-		load(const archiver& ar, const std::string& str)
-        {
-            ar.load(*this, str);
-        }
-
-		/**
-		 * Deserialize properties from file.
-		 *
-		 * @param ar The archiver to use.
-		 * @path The file path.
-		 * @return @p true on success, @p false otherwise with optional error message.
-		 */
-        [[nodiscard("file i/o might fail")]]
-		std::pair<bool, std::string>
-		load(const archiver& ar, const std::filesystem::path& path)
-        {
-            return ar.load(*this, path);
         }
 
     private:

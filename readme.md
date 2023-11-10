@@ -11,7 +11,7 @@ The library is built with the following aspects in mind:
 - Easy to use
 - Providing "raw access" to the properties just as if they were regular class members.
 - Easy registration of custom property types.
-- Easy integration of optional (de)serialization (XML & JSON already optionally built-in).
+- Optional (de)serialization via [GPDS](https://github.com/simulton/gpds).
 - Observer interface for property change notifications.
 - Support for linked properties (properties in a base class not implementing this library).
 - GUI generator (Qt widgets)
@@ -25,9 +25,6 @@ A couple of things to be aware of when using this library:
 
 # License
 This library is MIT licensed.
-
-- If JSON (de)serialization is enabled, [nlohmann::json](https://github.com/nlohmann/json) is used for JSON serialization. The json library itself is MIT licensed.
-- If XML (de)serialization is enabled, [tinyxml2](https://github.com/leethomason/tinyxml2) is used for XML serialization. The tinyxml2 library itself is zlib licensed.
 
 # Support types
 Any type can be registered as a property type using the `REGISTER_PROPERTY` macro.
@@ -146,7 +143,8 @@ int main()
 ```
 
 ## Serialization
-The library comes with built-in support for (de)serialization. Classes can be easily (de)serialization to/from XML:
+Properties can be (de)serialized via [GPDS](https://github.com/simulton/gpds) to and from various formats such as XML and YAML.
+For (de)serialization options, check the GPDS documentation.
 ```cpp
 struct shape :
     tct::properties::properties

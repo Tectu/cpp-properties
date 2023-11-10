@@ -28,25 +28,9 @@ if (CPPPROPERTIES_ENABLE_BOOST)
 endif()
 
 # GPDS
-if (CPPPROPERTIES_ENABLE_GPDS)
+if (CPPPROPERTIES_ENABLE_SERIALIZATION)
     find_package(
         gpds
-        REQUIRED
-    )
-endif()
-
-# JSON
-if (CPPPROPERTIES_ENABLE_JSON)
-    find_package(
-        nlohmann_json
-        REQUIRED
-    )
-endif()
-
-# XML
-if (CPPPROPERTIES_ENABLE_XML)
-    find_package(
-        tinyxml2
         REQUIRED
     )
 endif()

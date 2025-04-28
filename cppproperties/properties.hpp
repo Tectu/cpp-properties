@@ -174,7 +174,7 @@ namespace tct::properties
                 throw std::logic_error("setter must not be null.");
 
             auto p = new property_link_functions<T>(setter, getter);
-            m_properties.template emplace(name, p);
+            m_properties.emplace(name, p);
         }
 
 		/**
